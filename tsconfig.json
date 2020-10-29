@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "allowJs": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
@@ -18,6 +19,6 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["node_modules"],
+  "exclude": [".next", ".vercel", "build", "dist", "node_modules", "cypress", ".vscode"],
   "include": ["**/*.ts", "**/*.tsx"]
 }

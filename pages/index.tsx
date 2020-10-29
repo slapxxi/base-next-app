@@ -1,15 +1,24 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import { css } from '@emotion/core';
+import { NextPage } from 'next';
+import tw from 'twin.macro';
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+let IndexPage: NextPage = () => {
+  return (
+    <div
+      css={css`
+        ${tw`p-2`}
+      `}
+    >
+      <h1
+        css={css`
+          ${tw`m-0`}
+        `}
+      >
+        Title
+      </h1>
+      component
+    </div>
+  );
+};
 
-export default IndexPage
+export default IndexPage;
