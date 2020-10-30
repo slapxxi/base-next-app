@@ -2,6 +2,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
+import { Layout } from '../components/Layout';
 import { defaultTheme } from '../lib/style/theme';
 import '../styles/index.scss';
 
@@ -14,7 +15,9 @@ let AppPage: AppType = (props) => {
     <ReactQueryCacheProvider queryCache={queryCache}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={defaultTheme}>
-          <Component {...pageProps}></Component>
+          <Layout>
+            <Component {...pageProps}></Component>
+          </Layout>
         </ThemeProvider>
       </Hydrate>
     </ReactQueryCacheProvider>

@@ -7,5 +7,28 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Gilroy, sans-serif;
+  background: #000;
+}
+
+html.no-scroll,
+body.no-scroll {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+@font-face {
+  font-family: 'Journalism';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Journalism.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Gilroy.ttf') format('truetype');
+  font-display: swap;
 }
