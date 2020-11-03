@@ -1,23 +1,25 @@
 {
   "compilerOptions": {
+    "target": "ES5",
     "allowJs": true,
-    "alwaysStrict": true,
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "lib": ["dom", "es2017"],
-    "module": "esnext",
+    "esModuleInterop": true,
+    "module": "ESNext",
     "moduleResolution": "node",
+    "isolatedModules": true,
+    "strict": true,
+    "lib": ["DOM", "ESNext", "DOM.Iterable"],
     "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext"
+    "removeComments": false,
+    "sourceMap": true,
+    "jsx": "preserve"
   },
   "exclude": [".next", ".vercel", "build", "dist", "node_modules", "cypress", ".vscode"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

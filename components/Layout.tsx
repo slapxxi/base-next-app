@@ -2,9 +2,9 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { lighten } from 'polished';
-import { useState } from 'react';
-import { Facebook, Instagram, Linkedin, Menu, Search, Twitter, X } from 'react-feather';
-import { animated as a, useSpring } from 'react-spring';
+import React, { useState } from 'react';
+import { Menu, Search, X } from 'react-feather';
+import { animated as a } from 'react-spring';
 import tw from 'twin.macro';
 import { phone, routes } from '../lib/constants';
 import { useLockScroll } from '../lib/hooks/useLockScroll';
@@ -12,7 +12,9 @@ import { useRouteChange } from '../lib/hooks/useRouteChange';
 import { WithTheme } from '../lib/types';
 import { Drawer } from './Drawer';
 import { Logo } from './Logo';
-import { SocialIcon } from './SocialIcon';
+import { SocialIconDribbble } from './SocialIconDribbble';
+import { SocialIconFacebook } from './SocialIconFacebook';
+import { SocialIconTwitter } from './SocialIconTwitter';
 
 export let Layout: React.FC = (props) => {
   let { children } = props;
@@ -20,18 +22,16 @@ export let Layout: React.FC = (props) => {
     setMenuActive(false);
   });
   let [menuActive, setMenuActive] = useState(false);
-  let ap = useSpring({ x: menuActive ? -1 : 1 });
 
   useLockScroll(menuActive);
 
   return (
-    <a.div
+    <div
       css={css`
         ${tw`h-full`}
         will-change: transform;
         transform-origin: top left;
       `}
-      style={{ transform: ap.x.interpolate((x) => `scale(${x}, 1)`) }}
     >
       <a.div
         css={css`
@@ -40,7 +40,6 @@ export let Layout: React.FC = (props) => {
           grid-template-rows: auto 1fr auto;
           will-change: transform;
         `}
-        style={{ transform: ap.x.interpolate((x) => `scale(${1 / x}, 1)`) }}
       >
         <Drawer
           open={menuActive}
@@ -107,14 +106,25 @@ export let Layout: React.FC = (props) => {
               `}
             >
               <span>
-                RU/
-                <span
-                  css={(theme) => css`
-                    color: ${theme.colors.textHeaderActive};
-                  `}
-                >
-                  EN
-                </span>
+                <Link href={router.pathname} locale="ru">
+                  <a
+                    css={(theme) => css`
+                      color: ${router.locale !== 'ru' && theme.colors.textHeaderActive};
+                    `}
+                  >
+                    RU
+                  </a>
+                </Link>
+                /
+                <Link href={router.pathname} locale="en-US">
+                  <a
+                    css={(theme) => css`
+                      color: ${router.locale !== 'en-US' && theme.colors.textHeaderActive};
+                    `}
+                  >
+                    EN
+                  </a>
+                </Link>
               </span>
             </NavFooterItem>
             <NavFooterItem
@@ -184,6 +194,7 @@ export let Layout: React.FC = (props) => {
         <section
           css={(theme) => css`
             background: ${theme.colors.bgContent};
+            overflow: hidden;
           `}
         >
           {children}
@@ -245,18 +256,9 @@ export let Layout: React.FC = (props) => {
               ${tw`flex justify-between`}
             `}
           >
-            <FooterSocialIcon
-              icon={(props) => <Instagram {...props} strokeWidth={1.5}></Instagram>}
-            ></FooterSocialIcon>
-            <FooterSocialIcon
-              icon={(props) => <Facebook {...props} stroke="none" fill="currentColor"></Facebook>}
-            ></FooterSocialIcon>
-            <FooterSocialIcon
-              icon={(props) => <Twitter {...props} stroke="none" fill="currentColor"></Twitter>}
-            ></FooterSocialIcon>
-            <FooterSocialIcon
-              icon={(props) => <Linkedin {...props} stroke="none" fill="currentColor"></Linkedin>}
-            ></FooterSocialIcon>
+            <FooterSocialIcon as={SocialIconTwitter}></FooterSocialIcon>
+            <FooterSocialIcon as={SocialIconDribbble}></FooterSocialIcon>
+            <FooterSocialIcon as={SocialIconFacebook}></FooterSocialIcon>
           </div>
           <div
             css={(theme) => css`
@@ -267,13 +269,12 @@ export let Layout: React.FC = (props) => {
           </div>
         </footer>
       </a.div>
-    </a.div>
+    </div>
   );
 };
 
-let FooterSocialIcon = styled(SocialIcon)<WithTheme>`
+let FooterSocialIcon = styled.div<WithTheme>`
   stroke: ${({ theme }) => theme.colors.textFooterActive};
-  width: 36px;
 `;
 
 let Button = styled.button`

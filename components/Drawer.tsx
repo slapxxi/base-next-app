@@ -23,6 +23,10 @@ export let Drawer: React.FC<Props> = (props) => {
 
   let ap = useSpring({
     x: open ? 1 : 0,
+    config: {
+      tension: 240,
+      precision: 0.001,
+    },
   });
 
   if (mounted) {
@@ -34,7 +38,6 @@ export let Drawer: React.FC<Props> = (props) => {
           background: ${theme.colors.bgDrawer};
           transform-origin: top right;
           will-change: transform;
-          box-shadow: -25px 10px 80px rgba(0, 0, 0, 0.3);
         `}
         style={{ transform: ap.x.interpolate((x) => `scale(${x}, 1)`) }}
       >

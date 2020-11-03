@@ -14,6 +14,8 @@ export let SocialIcon: React.FC<Props> = (props) => {
       viewBox="0 0 24 24"
       css={css`
         stroke: currentColor;
+        width: 36px;
+        height: 36px;
       `}
       {...rest}
     >
