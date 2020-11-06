@@ -46,7 +46,9 @@ export let ItemCardFooter: React.FC<Props> = () => {
       >
         <div
           css={css`
-            ${tw`my-2 flex bg-black p-2 shadow-lg text-white space-x-2 rounded-xl`}
+            ${tw`my-2 flex p-2 shadow-lg text-white space-x-2 rounded-xl`}
+            background: #000a;
+            backdrop-filter: blur(10px) saturate(2);
           `}
         >
           {/* @ts-ignore */}
@@ -62,5 +64,5 @@ export let ItemCardFooter: React.FC<Props> = () => {
 };
 
 let ShareIcon = styled.div<WithTheme>`
-  stroke: ${(props) => props.theme.colors.textDropdownActive};
+  stroke: #fff5;
 `;

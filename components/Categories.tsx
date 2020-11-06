@@ -16,6 +16,8 @@ export let Categories: React.FC = () => {
               src="/images/natural.png"
               width={261}
               height={201}
+              layout="fixed"
+              loading="eager"
               css={css`
                 ${tw`rounded-lg shadow`}
               `}
@@ -31,6 +33,8 @@ export let Categories: React.FC = () => {
               src="/images/sculpture.png"
               width={261}
               height={201}
+              layout="fixed"
+              loading="eager"
               css={css`
                 ${tw`rounded-lg shadow`}
               `}
@@ -46,6 +50,8 @@ export let Categories: React.FC = () => {
               src="/images/drawing.png"
               width={261}
               height={201}
+              layout="fixed"
+              loading="eager"
               css={css`
                 ${tw`rounded-lg shadow`}
               `}
@@ -61,6 +67,8 @@ export let Categories: React.FC = () => {
               src="/images/digital-art.png"
               width={261}
               height={201}
+              layout="fixed"
+              loading="eager"
               css={css`
                 ${tw`rounded-lg shadow`}
               `}
@@ -76,6 +84,8 @@ export let Categories: React.FC = () => {
               src="/images/handmade.png"
               width={261}
               height={201}
+              layout="fixed"
+              loading="eager"
               css={css`
                 ${tw`rounded-lg shadow`}
               `}

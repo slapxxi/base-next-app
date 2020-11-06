@@ -1,5 +1,4 @@
 import { css } from '@emotion/core';
-import Image from 'next/image';
 import React from 'react';
 import tw from 'twin.macro';
 import { AuctionLot } from '../lib/types';
@@ -27,13 +26,13 @@ export let ItemCard: React.FC<Props> = (props) => {
           ${tw`relative`}
         `}
       >
-        <Image
+        <img
           src={item.img}
-          unsized
+          alt="Image"
           css={css`
-            ${tw`w-full`}
+            ${tw`w-full rounded-lg shadow`}
           `}
-        ></Image>
+        />
 
         <div
           css={css`

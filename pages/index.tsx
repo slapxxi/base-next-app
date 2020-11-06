@@ -41,7 +41,7 @@ let IndexPage: NextPage = () => {
 
       <div
         css={(theme) => css`
-          ${tw`p-4`}
+          ${tw`p-2`}
           background: ${theme.colors.bgItem};
         `}
       >

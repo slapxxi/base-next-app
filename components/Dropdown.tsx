@@ -94,7 +94,7 @@ export let Dropdown: React.FC<Props> = (props) => {
       <a.div
         ref={dropdownRef}
         css={(theme) => css`
-          ${tw`absolute shadow-lg z-50 overflow-hidden`}
+          ${tw`overflow-hidden`}
           ${fixed ? tw`fixed` : tw`absolute`}
           ${position}
           background: ${theme.colors.bgDropdown};

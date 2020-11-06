@@ -1,6 +1,5 @@
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import Image from 'next/image';
 import React from 'react';
 import { useQuery } from 'react-query';
 import tw from 'twin.macro';
@@ -16,9 +15,10 @@ export let Slider: React.FC = () => {
     <div
       css={(theme) => css`
         ${tw`flex space-x-2 p-2`}
+        overflow-y: hidden;
         overflow-x: scroll;
         scroll-snap-type: mandatory;
-        scroll-snap-points-x: repeat(1040px);
+        scroll-snap-points-x: repeat(300px);
         scroll-snap-type: x mandatory;
         color: ${theme.colors.textItemTitle};
       `}
@@ -26,39 +26,13 @@ export let Slider: React.FC = () => {
       {data.map((item) => (
         <React.Fragment key={item.id}>
           <SliderItem>
-            <Image src="/images/big-1.png" width={1040} height={540}></Image>
-            <SlideTitle>Auction Number 79</SlideTitle>
-            <div
+            <img
+              src="/images/big-1.png"
               css={css`
-                ${tw`flex flex-col space-y-2`}
+                ${tw`w-full`}
+                min-width: 300px;
               `}
-            >
-              <div
-                css={css`
-                  ${tw`text-black font-bold my-4`}
-                `}
-              >
-                Lot Number 00{item.id}
-              </div>
-              <div>Author: {item.author}</div>
-              <div>Name: {item.name}</div>
-              <div>Canvas, paint, tempera 50x50cm</div>
-            </div>
-            <div>
-              Starting Price
-              <div
-                css={css`
-                  ${tw`absolute bg-black text-white p-2 rounded text-xl font-bold bg-opacity-75`}
-                  top: 0.5rem;
-                  right: 0.5rem;
-                `}
-              >
-                <Price value={item.startingPrice}></Price>
-              </div>
-            </div>
-          </SliderItem>
-          <SliderItem>
-            <Image src="/images/big-2.png" width={1040} height={540}></Image>
+            />
             <SlideTitle>Auction Number 79</SlideTitle>
             <div
               css={css`
@@ -97,7 +71,7 @@ export let Slider: React.FC = () => {
 
 let SliderItem = styled.div`
   ${tw`relative`}
-  width: 80%;
+  width: 100%;
   scroll-snap-align: center;
 `;
 
