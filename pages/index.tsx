@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { NextPage } from 'next';
 import tw from 'twin.macro';
 
@@ -11,7 +11,7 @@ let IndexPage: NextPage = () => {
     >
       <h1
         css={css`
-          ${tw`m-0`}
+          ${tw`m-0 flex`}
         `}
       >
         Title

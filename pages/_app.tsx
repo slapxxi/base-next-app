@@ -1,5 +1,6 @@
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from '@emotion/react';
 import { AppType } from 'next/dist/next-server/lib/utils';
+import React from 'react';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 import { defaultTheme } from '../lib/style/theme';
