@@ -13,6 +13,13 @@
       "userDataDir": "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir"
     },
     {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "type": "node",
       "name": "Next: Node",
       "request": "attach",
@@ -22,7 +29,7 @@
   "compounds": [
     {
       "name": "Next: Full",
-      "configurations": ["Next: Node", "Next: Chrome"]
+      "configurations": ["Next: Node", "Attach to Chrome"]
     }
   ]
 }
