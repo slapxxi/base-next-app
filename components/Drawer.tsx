@@ -24,8 +24,7 @@ export let Drawer: React.FC<Props> = (props) => {
   let ap = useSpring({
     x: open ? 1 : 0,
     config: {
-      tension: 240,
-      precision: 0.001,
+      tension: 200,
     },
   });
 
