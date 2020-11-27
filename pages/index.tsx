@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { NextPage } from 'next';
+import React from 'react';
 import tw from 'twin.macro';
 
 let IndexPage: NextPage = () => {
@@ -16,7 +17,6 @@ let IndexPage: NextPage = () => {
       >
         Title
       </h1>
-      component
     </div>
   );
 };

@@ -17,3 +17,5 @@ export type APIResponse<T = undefined> =
 export type Serialized<T> = {
   [P in keyof T]: T[P] extends Date ? string : T[P];
 };
+
+export type UIComponentSize = 'sm' | 'md' | 'lg';

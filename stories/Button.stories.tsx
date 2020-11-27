@@ -1,38 +1,55 @@
-import React from 'react';
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { Story, Meta } from '@storybook/react/types-6-0';
+import { Story } from '@storybook/react/types-6-0';
+import React, { ComponentProps } from 'react';
+import { Button } from '../components/Button';
 
-import { Button, ButtonProps } from './Button';
-
-export default {
-  title: 'Example/Button',
-  component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as Meta;
-
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+let Template: Story<ComponentProps<typeof Button>> = (args: any) => <Button {...args}></Button>;
 
 export const Primary = Template.bind({});
+
 Primary.args = {
-  primary: true,
-  label: 'Button',
+  variant: 'primary',
+  children: 'Primary Button',
 };
 
 export const Secondary = Template.bind({});
+
 Secondary.args = {
-  label: 'Button',
+  variant: 'secondary',
+  children: 'Secondary Button',
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
+export const Lifted = Template.bind({});
+
+Lifted.args = {
+  variant: 'lifted',
+  children: 'Lifted Button',
 };
 
 export const Small = Template.bind({});
+
 Small.args = {
-  size: 'small',
-  label: 'Button',
+  variant: 'primary',
+  size: 'sm',
+  children: 'Small Button',
+};
+
+export const Medium = Template.bind({});
+
+Medium.args = {
+  variant: 'primary',
+  size: 'md',
+  children: 'Medium Button',
+};
+
+export const Large = Template.bind({});
+
+Large.args = {
+  variant: 'primary',
+  size: 'lg',
+  children: 'Large Button',
+};
+
+export default {
+  title: 'Button',
+  component: Button,
 };
