@@ -11,7 +11,7 @@
     "twin": {
       "config": "tailwind.config.js",
       "preset": "emotion",
-      "debugProp": true,
+      "dataTwProp": true,
       "debugPlugins": false,
       "debug": false
     }
@@ -44,10 +44,10 @@
     "zustand": "^3.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.1.7",
-    "@storybook/addon-essentials": "^6.1.7",
-    "@storybook/addon-links": "^6.1.7",
-    "@storybook/react": "^6.1.7",
+    "@storybook/addon-actions": "^6.1.9",
+    "@storybook/addon-essentials": "^6.1.9",
+    "@storybook/addon-links": "^6.1.9",
+    "@storybook/react": "^6.1.9",
     "@types/babel__core": "^7.1.12",
     "@types/mongodb": "^3.5.34",
     "@types/node": "^14.14.10",
