@@ -3,35 +3,27 @@ import React from 'react';
 import { Rating } from './Rating';
 
 it('does not check by default', async () => {
-  let { getByTestId } = render(<Rating prefix="test"></Rating>);
+  let { queryByTestId } = render(<Rating prefix="test"></Rating>);
 
-  let star1 = getByTestId('test-star1') as HTMLInputElement;
-  let star2 = getByTestId('test-star2') as HTMLInputElement;
-  let star3 = getByTestId('test-star3') as HTMLInputElement;
-  let star4 = getByTestId('test-star4') as HTMLInputElement;
-  let star5 = getByTestId('test-star5') as HTMLInputElement;
-
-  expect(star1.checked).toEqual(false);
-  expect(star2.checked).toEqual(false);
-  expect(star3.checked).toEqual(false);
-  expect(star4.checked).toEqual(false);
-  expect(star5.checked).toEqual(false);
+  expect(queryByTestId('test-star1')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star2')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star3')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star4')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star5')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star6')).toBe(null);
 });
 
 it('checks value', async () => {
   let { getByTestId } = render(<Rating prefix="test" value={3}></Rating>);
-
-  let star1 = getByTestId('test-star1') as HTMLInputElement;
-  let star2 = getByTestId('test-star2') as HTMLInputElement;
   let star3 = getByTestId('test-star3') as HTMLInputElement;
-  let star4 = getByTestId('test-star4') as HTMLInputElement;
-  let star5 = getByTestId('test-star5') as HTMLInputElement;
-
-  expect(star1.checked).toEqual(false);
-  expect(star2.checked).toEqual(false);
   expect(star3.checked).toEqual(true);
-  expect(star4.checked).toEqual(false);
-  expect(star5.checked).toEqual(false);
+});
+
+it('accepts max value', () => {
+  let { getByTestId, queryByTestId } = render(<Rating prefix="test" value={8} max={10}></Rating>);
+  let star8 = getByTestId('test-star8') as HTMLInputElement;
+  expect(star8.checked).toEqual(true);
+  expect(queryByTestId('test-star-11')).toBe(null);
 });
 
 it('clamps value to max', () => {

@@ -12,9 +12,10 @@ interface RatingProps {
    */
   prefix: string;
   /**
-   * Value from 1 to 5
+   * Value from 1 to max
    */
   value?: number;
+  max?: number;
   size?: UIComponentSize;
   onChange?: (value: number) => void;
 }
@@ -23,9 +24,9 @@ interface RatingProps {
  * Displays 1-5 star rating
  */
 export let Rating: React.FC<RatingProps> = (props) => {
-  let { value, prefix, size, onChange } = props;
+  let { value, prefix, max = 5, size, onChange } = props;
   let computedValue = useMemo(() => {
-    return typeof value === 'number' ? clamp(value, 1, 5) : value;
+    return typeof value === 'number' ? clamp(value, 1, max) : value;
   }, [value]);
   let computedSize = useMemo(() => matchSize(size), [size]);
 
@@ -47,8 +48,8 @@ export let Rating: React.FC<RatingProps> = (props) => {
         }
       `}
     >
-      {new Array(5).fill(null).map((_, i) => {
-        let currentValue = 5 - i;
+      {new Array(max).fill(null).map((_, i) => {
+        let currentValue = max - i;
         let id = `${prefix}-star${currentValue}`;
 
         return (

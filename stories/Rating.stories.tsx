@@ -1,9 +1,13 @@
 import { Story } from '@storybook/react/types-6-0';
-import React, { ComponentProps, useState } from 'react';
+import React, { ComponentProps, useEffect, useState } from 'react';
 import { Rating } from '../components/Rating';
 
 let Template: Story<ComponentProps<typeof Rating>> = (args: any) => {
   let [value, setValue] = useState(args.value);
+
+  useEffect(() => {
+    setValue(args.value);
+  }, [args.value]);
 
   function handleChange(value: number) {
     setValue(value);
@@ -39,6 +43,13 @@ export const Large = Template.bind({});
 Large.args = {
   value: 3,
   size: 'lg',
+};
+
+export const Ten_Stars = Template.bind({});
+
+Ten_Stars.args = {
+  value: 8,
+  max: 10,
 };
 
 export default {
