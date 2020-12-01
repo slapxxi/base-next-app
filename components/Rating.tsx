@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import React from 'react';
+import { clamp } from 'lodash';
+import React, { useMemo } from 'react';
 import { Star } from 'react-feather';
 import tw from 'twin.macro';
 import { UIComponentSize } from '../lib/types';
@@ -10,14 +11,23 @@ interface RatingProps {
    * Required to create a unique HTML id
    */
   prefix: string;
+  /**
+   * Value from 1 to 5
+   */
   value?: number;
   size?: UIComponentSize;
   onChange?: (value: number) => void;
 }
 
+/**
+ * Displays 1-5 star rating
+ */
 export let Rating: React.FC<RatingProps> = (props) => {
   let { value, prefix, size, onChange } = props;
-  let computedSize = matchSize(size);
+  let computedValue = useMemo(() => {
+    return typeof value === 'number' ? clamp(value, 1, 5) : value;
+  }, [value]);
+  let computedSize = useMemo(() => matchSize(size), [size]);
 
   function handleChange(event: any) {
     onChange?.(parseInt(event.target.value, 10));
@@ -45,13 +55,18 @@ export let Rating: React.FC<RatingProps> = (props) => {
           <React.Fragment key={currentValue}>
             <Input
               type="radio"
-              checked={value === currentValue}
+              checked={computedValue === currentValue}
               value={currentValue}
               id={id}
               onChange={handleChange}
               name="star"
+              data-testid={id}
             />
-            <Label htmlFor={id} active={!!(value && currentValue <= value)}>
+            <Label
+              htmlFor={id}
+              active={!!(computedValue && currentValue <= computedValue)}
+              data-testid={`${id}-label`}
+            >
               <Star fill="currentColor" size={computedSize}></Star>
             </Label>
           </React.Fragment>
