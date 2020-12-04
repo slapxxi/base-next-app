@@ -39,13 +39,7 @@ export let Rating: React.FC<RatingProps> = (props) => {
       css={css`
         ${tw`inline-flex flex-row-reverse p-0 m-0 border-0`}
 
-        & > ${Label}:hover {
-          color: goldenrod;
-
-          & ~ ${Label} {
-            color: goldenrod;
-          }
-        }
+        ${onChange && hoverStyles}
       `}
     >
       {new Array(max).fill(null).map((_, i) => {
@@ -78,11 +72,21 @@ export let Rating: React.FC<RatingProps> = (props) => {
 };
 
 let Label = styled.label<{ active?: boolean }>`
-  color: ${({ active }) => (active ? 'gold' : 'darkgrey')};
+  color: ${({ active }) => (active ? 'gold' : '#c1c1c3')};
 `;
 
 let Input = styled.input`
   ${tw`hidden`}
+`;
+
+let hoverStyles = css`
+  & > ${Label}:hover {
+    color: goldenrod;
+
+    & ~ ${Label} {
+      color: goldenrod;
+    }
+  }
 `;
 
 function matchSize(size?: UIComponentSize): number {
