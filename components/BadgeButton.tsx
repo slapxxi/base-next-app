@@ -19,15 +19,15 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
 
   return (
     <div
-      css={css`
+      css={(theme) => css`
         ${tw`relative`}
         width: ${computedSize}px;
-        ${variant === 'primary' && '--bg: #eb9b00;'}
-        ${variant === 'secondary' && '--bg: #d7d6d8;'}
-        ${variant === 'lifted' && '--bg: #fff;'}
-        ${variant === 'lifted' && 'filter: drop-shadow(-1px 3px 6px #0004)'};
+        ${variant === 'primary' && `--bg: ${theme.colors.bgButtonPrimary};`}
+        ${variant === 'secondary' && `--bg: ${theme.colors.bgButtonSecondary};`}
+        ${variant === 'lifted' && `--bg: ${theme.colors.bgButtonLifted};`}
+        ${variant === 'lifted' && `filter: drop-shadow(-1px 3px 6px ${theme.colors.shButton});`};
         line-height: 0;
-        color: var(--badgeText, #000);
+        color: var(--badgeText, ${theme.colors.textButton});
       `}
       {...rest}
     >
@@ -61,7 +61,7 @@ function matchSize(size: UIComponentSize): number {
     case 'md':
       return 32;
     case 'lg':
-      return 38;
+      return 40;
     default:
       return 32;
   }

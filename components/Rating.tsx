@@ -4,7 +4,7 @@ import { clamp } from 'lodash';
 import React, { useMemo } from 'react';
 import { Star } from 'react-feather';
 import tw from 'twin.macro';
-import { UIComponentSize } from '../lib/types';
+import { Theme, UIComponentSize } from '../lib/types';
 
 interface RatingProps {
   /**
@@ -36,10 +36,10 @@ export let Rating: React.FC<RatingProps> = (props) => {
 
   return (
     <fieldset
-      css={css`
+      css={(theme) => css`
         ${tw`inline-flex flex-row-reverse p-0 m-0 border-0`}
 
-        ${onChange && hoverStyles}
+        ${onChange && hoverStyles(theme)}
       `}
     >
       {new Array(max).fill(null).map((_, i) => {
@@ -71,20 +71,20 @@ export let Rating: React.FC<RatingProps> = (props) => {
   );
 };
 
-let Label = styled.label<{ active?: boolean }>`
-  color: ${({ active }) => (active ? 'gold' : '#c1c1c3')};
+let Label = styled.label<{ active?: boolean; theme: Theme }>`
+  color: ${({ active, theme }) => (active ? theme.colors.bgStarActive : theme.colors.bgStar)};
 `;
 
 let Input = styled.input`
   ${tw`hidden`}
 `;
 
-let hoverStyles = css`
+let hoverStyles = (theme: Theme) => css`
   & > ${Label}:hover {
-    color: goldenrod;
+    color: ${theme.colors.bgStarHover};
 
     & ~ ${Label} {
-      color: goldenrod;
+      color: ${theme.colors.bgStarHover};
     }
   }
 `;

@@ -17,17 +17,26 @@ export let Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <div
-      css={css`
+      css={(theme: any) => css`
         ${tw`inline-flex`}
-        ${variant === 'primary' && '--bg: #f8a700;'}
-        ${variant === 'secondary' && '--bg: #e7e6e8;'}
-        ${variant === 'lifted' && '--bg: #fff;'}
-        ${variant === 'lifted' && 'filter: drop-shadow(-1px 3px 6px #0004)'};
+        ${
+          variant === 'primary' &&
+          `--bg: ${theme.colors.bgButtonPrimary}; --badgeBg: ${theme.colors.bgBadgePrimary};`
+        }
+        ${
+          variant === 'secondary' &&
+          `--bg: ${theme.colors.bgButtonSecondary}; --badgeBg: ${theme.colors.bgBadgeSecondary};`
+        }
+        ${
+          variant === 'lifted' &&
+          `--bg: ${theme.colors.bgButtonLifted}; --badgeBg: ${theme.colors.bgBadgeLifted};`
+        }
+        ${variant === 'lifted' && `filter: drop-shadow(-1px 3px 6px ${theme.colors.shButton});`};
         --color: #000;
 
         :hover {
-          --bg: #333;
-          --color: #fff;
+          --bg: ${theme.colors.bgButtonHover};
+          --color: ${theme.colors.textButtonHover};
           --badgeBg: #666;
           --badgeText: #fff;
         }
