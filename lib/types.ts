@@ -20,6 +20,8 @@ export type Serialized<T> = {
 
 export type UIComponentSize = 'sm' | 'md' | 'lg';
 
+export type UIComponentVariant = 'primary' | 'lifted' | 'secondary';
+
 export interface UserReview {
   author: string;
   content: string;

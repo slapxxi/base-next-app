@@ -19,6 +19,9 @@ export let Review: React.FC<ReviewProps> = (props) => {
   let ref = useRef<HTMLParagraphElement>(null);
   let ap = useSpring({
     height: expanded ? ogHeight : 150,
+    config: {
+      tension: 230,
+    },
   });
 
   useLayoutEffect(() => {

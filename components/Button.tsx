@@ -1,14 +1,18 @@
 import { css } from '@emotion/react';
+import { ReactNode } from 'react';
 import tw from 'twin.macro';
-import { UIComponentSize } from '../lib/types';
+import { cloneElement } from '../lib/cloneElement';
+import { UIComponentSize, UIComponentVariant } from '../lib/types';
 
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'lifted';
+export interface ButtonProps {
   size?: UIComponentSize;
+  variant?: UIComponentVariant;
+  badgeButton?: JSX.Element;
+  children?: ReactNode;
 }
 
 export let Button: React.FC<ButtonProps> = (props) => {
-  let { children, variant = 'primary', size = 'md' } = props;
+  let { children, badgeButton, variant = 'primary', size = 'md' } = props;
   let computedSize = matchSize(size);
 
   return (
@@ -22,8 +26,10 @@ export let Button: React.FC<ButtonProps> = (props) => {
         --color: #000;
 
         :hover {
-          --bg: #000;
+          --bg: #333;
           --color: #fff;
+          --badgeBg: #666;
+          --badgeText: #fff;
         }
       `}
     >
@@ -39,12 +45,21 @@ export let Button: React.FC<ButtonProps> = (props) => {
       </svg>
       <div
         css={css`
-          ${tw`flex flex-1 items-center justify-center font-sans p-2`}
+          ${tw`flex flex-1 items-center justify-center font-sans`}
           background: var(--bg);
           color: var(--color);
         `}
       >
         {children}
+        {badgeButton &&
+          cloneElement(badgeButton, {
+            size,
+            variant,
+            css: css`
+              transform: translateX(50%);
+              z-index: 10;
+            `,
+          })}
       </div>
       <svg
         viewBox="0 0 3.1 6.4"
