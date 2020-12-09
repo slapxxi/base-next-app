@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import React, { ReactNode, useMemo } from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes, ReactNode, useMemo } from 'react';
 import tw from 'twin.macro';
 import { cloneElement } from '../lib/cloneElement';
 import { UIComponentSize, UIComponentVariant } from '../lib/types';
 
-export interface BadgeButtonProps {
+export interface BadgeButtonProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   icon: JSX.Element;
   size?: UIComponentSize;
   variant?: UIComponentVariant;
@@ -19,7 +20,7 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
 
   return (
     <div
-      css={(theme) => css`
+      css={(theme: any) => css`
         ${tw`relative`}
         width: ${computedSize}px;
         ${variant === 'primary' && `--bg: ${theme.colors.bgButtonPrimary};`}
@@ -57,12 +58,12 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
 function matchSize(size: UIComponentSize): number {
   switch (size) {
     case 'sm':
-      return 24;
+      return 20;
     case 'md':
-      return 32;
+      return 38;
     case 'lg':
-      return 40;
+      return 44;
     default:
-      return 32;
+      return 36;
   }
 }

@@ -19,6 +19,11 @@ export let defaultTheme = {
     bgStar: 'hsla(50, 10%, 80%, var(--bg-opacity))',
     bgStarActive: 'hsla(50, 100%, 50%, var(--bg-opacity))',
     bgStarHover: 'hsla(50, 100%, 75%, var(--bg-opacity))',
+    // Input
+    bgInputPrimary: 'hsla(40, 100%, 99%, var(--bg-opacity))',
+    bgInputHover: 'hsla(40, 15%, 20%, var(--bg-opacity))',
+    textInput: 'hsla(40, 15%, 20%, var(--bg-opacity))',
+    textInputHover: 'hsla(40, 15%, 90%, var(--bg-opacity))',
     // Generic
     bgItem: 'hsla(40, 10%, 99%, var(--bg-opacity))',
     borderItem: 'hsla(40, 10%, 90%, var(--border-opacity))',
