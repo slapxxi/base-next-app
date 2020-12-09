@@ -100,7 +100,7 @@ export let Input: React.FC<InputProps> = (props) => {
           type="email"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          css={(theme) => css`
+          css={css`
             ${tw`z-10`}
             min-width: 100px;
             border: 0;
@@ -158,7 +158,7 @@ let hoverStyles = (theme: Theme) => css`
   --badgeText: #fff;
 `;
 
-function inputReducer(state, action) {
+function inputReducer(state: any, action: any) {
   switch (state.status) {
     case 'idle':
       switch (action.type) {

@@ -41,6 +41,7 @@ export let defaultTheme = {
 export let darkTheme: Theme = {
   type: 'dark',
   colors: {
+    ...defaultTheme.colors,
     // Button
     bgButtonPrimary: 'hsla(40, 5%, 40%, var(--bg-opacity))',
     bgButtonSecondary: 'hsla(40, 10%, 80%, var(--bg-opacity))',
