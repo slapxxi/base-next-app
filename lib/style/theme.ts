@@ -24,6 +24,10 @@ export let defaultTheme = {
     bgInputHover: 'hsla(40, 15%, 20%, var(--bg-opacity))',
     textInput: 'hsla(40, 15%, 20%, var(--bg-opacity))',
     textInputHover: 'hsla(40, 15%, 90%, var(--bg-opacity))',
+    // Tag
+    bgTag: 'hsla(40, 10%, 92%, var(--bg-opacity))',
+    bgTagHot: 'hsla(1, 91%, 47%, var(--bg-opacity))',
+    textTagHot: 'hsla(1, 100%, 95%, var(--bg-opacity))',
     // Generic
     bgItem: 'hsla(40, 10%, 99%, var(--bg-opacity))',
     borderItem: 'hsla(40, 10%, 90%, var(--border-opacity))',
