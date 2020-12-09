@@ -71,7 +71,7 @@ export let Rating: React.FC<RatingProps> = (props) => {
   );
 };
 
-let Label = styled.label<{ active?: boolean; theme: Theme }>`
+let Label = styled.label<{ active?: boolean; theme?: Theme }>`
   color: ${({ active, theme }) => (active ? theme.colors.bgStarActive : theme.colors.bgStar)};
 `;
 

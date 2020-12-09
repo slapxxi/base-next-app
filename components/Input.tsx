@@ -27,7 +27,7 @@ export let Input: React.FC<InputProps> = (props) => {
 
   return (
     <div
-      css={(theme: any) => css`
+      css={(theme) => css`
         ${tw`inline-flex`}
         --bg: ${theme.colors.bgInputPrimary};
         --badgeBg: ${theme.colors.textInput};
@@ -100,7 +100,7 @@ export let Input: React.FC<InputProps> = (props) => {
           type="email"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          css={(theme: any) => css`
+          css={(theme) => css`
             ${tw`z-10`}
             min-width: 100px;
             border: 0;

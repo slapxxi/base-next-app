@@ -39,7 +39,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <div
-      css={(theme: any) => css`
+      css={(theme) => css`
         ${tw`inline-flex`}
         ${variantStyles(theme)}
         --color: #000;

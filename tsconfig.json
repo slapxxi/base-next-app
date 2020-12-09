@@ -19,6 +19,16 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": [".next", ".vercel", "build", "dist", "node_modules", "cypress", ".vscode"],
+  "exclude": [
+    ".next",
+    ".vercel",
+    "build",
+    "dist",
+    "node_modules",
+    "cypress",
+    ".vscode",
+    ".storybook",
+    "stories"
+  ],
   "include": ["**/*.ts", "**/*.tsx"]
 }

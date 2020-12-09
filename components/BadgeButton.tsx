@@ -20,7 +20,7 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
 
   return (
     <div
-      css={(theme: any) => css`
+      css={(theme) => css`
         ${tw`relative`}
         width: ${computedSize}px;
         ${variant === 'primary' && `--bg: ${theme.colors.bgButtonPrimary};`}

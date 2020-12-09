@@ -13,7 +13,7 @@ export let Tag: React.FC<TagProps> = (props) => {
 
   return (
     <span
-      css={(theme: any) => css`
+      css={(theme) => css`
         ${tw`uppercase font-bold text-xs bg-gray-300 px-2 py-1 rounded`}
         background: ${theme.colors.bgTag};
         
