@@ -10,6 +10,13 @@ Primary.args = {
   children: 'Title',
 };
 
+export const ExtraSmall = Template.bind({});
+
+ExtraSmall.args = {
+  size: 'xs',
+  children: 'Title',
+};
+
 export const Small = Template.bind({});
 
 Small.args = {
@@ -28,6 +35,13 @@ export const Large = Template.bind({});
 
 Large.args = {
   size: 'lg',
+  children: 'Title',
+};
+
+export const ExtraLarge = Template.bind({});
+
+ExtraLarge.args = {
+  size: 'xl',
   children: 'Title',
 };
 

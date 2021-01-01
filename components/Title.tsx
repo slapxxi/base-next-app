@@ -4,7 +4,7 @@ import { UIComponentSize } from '../lib/types';
 
 export interface TitleProps {
   children?: ReactNode;
-  size?: UIComponentSize;
+  size?: UIComponentSize | 'xs' | 'xl';
 }
 
 export let Title: React.FC<TitleProps> = (props) => {
@@ -24,13 +24,17 @@ export let Title: React.FC<TitleProps> = (props) => {
   );
 };
 
-function matchSize(size: UIComponentSize): number {
+function matchSize(size: UIComponentSize | 'xs' | 'xl'): number {
   switch (size) {
+    case 'xs':
+      return 16;
     case 'sm':
       return 20;
     case 'md':
       return 28;
     case 'lg':
+      return 34;
+    case 'xl':
       return 40;
     default:
       return 28;
