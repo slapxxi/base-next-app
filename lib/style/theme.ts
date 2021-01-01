@@ -30,6 +30,8 @@ export let defaultTheme = {
     textTagHot: 'hsla(1, 100%, 95%, var(--bg-opacity))',
     // Notice
     bgNotice: 'hsla(40, 15%, 95%, var(--bg-opacity))',
+    // List
+    bgListMarker: 'hsla(40, 5%, 80%, var(--bg-opacity))',
     // Generic
     bgItem: 'hsla(40, 10%, 99%, var(--bg-opacity))',
     borderItem: 'hsla(40, 10%, 90%, var(--border-opacity))',
