@@ -59,6 +59,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
         css={css`
           height: ${computedSize}px;
           fill: var(--bg);
+          transform: translateX(1px);
         `}
       >
         <path d="M1.5.4A.8.8 90 012.2 0H3.1V6.4H2.2A.8.8 90 011.5 6L.13 3.6A.8.8 90 01.13 2.8L1.5.4Z"></path>
@@ -85,6 +86,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
         viewBox="0 0 3.1 6.4"
         css={css`
           height: ${computedSize}px;
+          transform: translateX(-1px);
           fill: var(--bg);
         `}
       >
