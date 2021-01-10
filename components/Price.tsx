@@ -25,17 +25,18 @@ export let Price: React.FC<PriceProps> = (props) => {
         {...rest}
       >
         <svg
-          viewBox="0 0 5 10"
+          viewBox="0 0 16 9"
           preserveAspectRatio="none"
           css={css`
             ${tw`absolute`}
             top: 0;
             width: 100%;
             height: 100%;
-            transform: rotate(-5deg);
+            fill: none;
+            stroke: #f00d;
           `}
         >
-          <path d="M0 5L5 5" stroke="#f00d" fill="none"></path>
+          <path d="M.1 6L15.9 2" />
         </svg>
         {formattedValue}
       </span>
