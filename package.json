@@ -23,7 +23,7 @@
     "start": "next start",
     "test": "jest",
     "type-check": "tsc",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

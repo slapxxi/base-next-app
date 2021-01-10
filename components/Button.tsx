@@ -9,10 +9,11 @@ export interface ButtonProps {
   variant?: UIComponentVariant;
   badgeButton?: JSX.Element;
   children?: ReactNode;
+  className?: string;
 }
 
 export let Button: React.FC<ButtonProps> = (props) => {
-  let { children, badgeButton, variant = 'primary', size = 'md' } = props;
+  let { children, badgeButton, variant = 'primary', size = 'md', className } = props;
   let computedSize = matchSize(size);
   let variantStyles = useMemo(() => {
     switch (variant) {
@@ -39,6 +40,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <div
+      className={className}
       css={(theme) => css`
         ${tw`inline-flex`}
         ${variantStyles(theme)}

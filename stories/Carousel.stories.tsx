@@ -1,26 +1,22 @@
 import { Story } from '@storybook/react/types-6-0';
 import React, { useState } from 'react';
 import { Carousel, CarouselProps } from '../components/Carousel';
+import { ItemCard } from '../components/ItemCard';
+import { RetailItem } from '../lib/types';
+
+let item: RetailItem = {
+  id: '1',
+  title: 'Фибра армирующая (стекловолокно) добавка к строительным смесям 100...',
+  img: '/img/item.png',
+  price: 9900,
+  previousPrice: 12900,
+  tags: [],
+};
 
 let Template: Story<CarouselProps> = (args: any) => <Carousel {...args}></Carousel>;
 
-let CarouselItem = (props) => {
-  let { bg = 'tomato' } = props;
-
-  return (
-    <div
-      style={{
-        boxSizing: 'border-box',
-        background: bg,
-        padding: 20,
-        borderRadius: 4,
-        width: 275,
-        height: 275,
-      }}
-    >
-      Item
-    </div>
-  );
+let CarouselItem = () => {
+  return <ItemCard item={item}></ItemCard>;
 };
 
 export const Primary = Template.bind({});
@@ -28,11 +24,11 @@ export const Primary = Template.bind({});
 Primary.args = {
   children: [
     <CarouselItem></CarouselItem>,
-    <CarouselItem bg="cyan"></CarouselItem>,
-    <CarouselItem bg="green"></CarouselItem>,
-    <CarouselItem bg="purple"></CarouselItem>,
-    <CarouselItem bg="yellowgreen"></CarouselItem>,
-    <CarouselItem bg="greenyellow"></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
   ],
 };
 
@@ -59,11 +55,11 @@ export const WithControls = (args) => {
 WithControls.args = {
   children: [
     <CarouselItem></CarouselItem>,
-    <CarouselItem bg="cyan"></CarouselItem>,
-    <CarouselItem bg="green"></CarouselItem>,
-    <CarouselItem bg="purple"></CarouselItem>,
-    <CarouselItem bg="yellowgreen"></CarouselItem>,
-    <CarouselItem bg="greenyellow"></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
   ],
 };
 

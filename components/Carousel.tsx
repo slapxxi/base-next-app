@@ -8,10 +8,11 @@ import tw from 'twin.macro';
 export interface CarouselProps {
   children?: ReactNode;
   activeIndex?: number;
+  itemWidth?: number;
 }
 
 export let Carousel: React.FC<CarouselProps> = (props) => {
-  let { children, activeIndex } = props;
+  let { children, activeIndex, itemWidth = 275 } = props;
   let containerRef = useRef<HTMLDivElement>(null);
   let offsetRef = useRef(0);
   let [springs, set] = useSprings(Children.count(children), (i) => ({
@@ -27,15 +28,19 @@ export let Carousel: React.FC<CarouselProps> = (props) => {
           direction: [dx],
         } = status;
         if (velocity > 1) {
-          offsetRef.current += 300 * lerp(1, 10, velocity / 20) * dx;
+          offsetRef.current += itemWidth * lerp(1, 10, velocity / 20) * dx;
         }
         offsetRef.current += offset;
-        offsetRef.current = clamp(offsetRef.current, -275 * (Children.count(children) - 1), 0);
+        offsetRef.current = clamp(
+          offsetRef.current,
+          -itemWidth * (Children.count(children) - 1),
+          0,
+        );
         set({ x: offsetRef.current });
       },
       onDrag: (status) => {
         let {
-          movement: [mx, my],
+          movement: [mx],
         } = status;
         offset = mx;
         set({ x: offsetRef.current + mx });
@@ -48,7 +53,8 @@ export let Carousel: React.FC<CarouselProps> = (props) => {
 
   useEffect(() => {
     if (activeIndex !== undefined) {
-      set({ x: (activeIndex % Children.count(children)) * -275 });
+      offsetRef.current = (activeIndex % Children.count(children)) * -itemWidth;
+      set({ x: offsetRef.current });
     }
   }, [activeIndex]);
 

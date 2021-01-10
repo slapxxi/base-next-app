@@ -28,3 +28,12 @@ export interface UserReview {
   rating: number;
   createdAt: Date;
 }
+
+export interface RetailItem {
+  id: string;
+  title: string;
+  price: number;
+  previousPrice?: number;
+  tags: string[];
+  img?: string;
+}
