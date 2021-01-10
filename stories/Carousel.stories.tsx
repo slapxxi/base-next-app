@@ -38,7 +38,7 @@ export const WithControls = (args) => {
   let [activeIndex, setActiveIndex] = useState(0);
 
   function handlePrev() {
-    setActiveIndex(Math.max(activeIndex - 1, 0));
+    setActiveIndex(activeIndex - 1);
   }
 
   function handleNext() {
@@ -47,7 +47,7 @@ export const WithControls = (args) => {
 
   return (
     <div>
-      <Carousel {...args} activeIndex={Math.abs(activeIndex % 8)}></Carousel>
+      <Carousel {...args} activeIndex={activeIndex}></Carousel>
       <button onClick={handlePrev}>Prev</button>
       <button onClick={handleNext}>Next</button>
     </div>

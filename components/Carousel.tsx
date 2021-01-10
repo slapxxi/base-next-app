@@ -53,7 +53,9 @@ export let Carousel: React.FC<CarouselProps> = (props) => {
 
   useEffect(() => {
     if (activeIndex !== undefined) {
-      offsetRef.current = (activeIndex % Children.count(children)) * -itemWidth;
+      let childrenCount = Children.count(children);
+      let index = (childrenCount + (activeIndex % childrenCount)) % childrenCount;
+      offsetRef.current = index * -itemWidth;
       set({ x: offsetRef.current });
     }
   }, [activeIndex]);
