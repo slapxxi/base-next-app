@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import React, { ReactNode } from 'react';
 import { Heart } from 'react-feather';
 import tw from 'twin.macro';
@@ -11,10 +11,23 @@ import { Title } from './Title';
 export interface ItemCardProps {
   item: RetailItem;
   children?: ReactNode;
+  onLike?: (item: RetailItem) => void;
 }
 
+let pulseAnimation = keyframes`
+50% {
+  transform: scale(1.3);
+}
+`;
+
+let pulseAnimation2 = keyframes`
+50% {
+  transform: scale(0.7);
+}
+`;
+
 export let ItemCard: React.FC<ItemCardProps> = (props) => {
-  let { item } = props;
+  let { item, onLike } = props;
 
   return (
     <div
@@ -52,11 +65,25 @@ export let ItemCard: React.FC<ItemCardProps> = (props) => {
             <Tag>Хит</Tag>
           </div>
           <div
+            onClick={() => onLike?.(item)}
             css={css`
-              ${tw`flex items-center`}
+              ${tw`flex items-center cursor-pointer`}
             `}
           >
-            <Heart size={20}></Heart>
+            <Heart
+              size={20}
+              css={
+                item.liked
+                  ? (theme) => css`
+                      fill: ${theme.colors.bgTagHot};
+                      stroke: ${theme.colors.bgTagHot};
+                      animation: ${pulseAnimation} 0.3s;
+                    `
+                  : css`
+                      animation: ${pulseAnimation2} 0.3s;
+                    `
+              }
+            ></Heart>
           </div>
         </div>
         <div

@@ -34,6 +34,7 @@ export interface RetailItem {
   title: string;
   price: number;
   previousPrice?: number;
+  liked: boolean;
   tags: string[];
   img?: string;
 }
