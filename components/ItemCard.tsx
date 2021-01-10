@@ -70,8 +70,21 @@ export let ItemCard: React.FC<ItemCardProps> = (props) => {
             transition: opacity 0.2s 0.6s;
           `}
         >
-          <Button variant="lifted">Быстрый заказ</Button>
-          <Button>Добавить в корзину</Button>
+          <Button
+            variant="lifted"
+            css={css`
+              min-width: 80%;
+            `}
+          >
+            Быстрый заказ
+          </Button>
+          <Button
+            css={css`
+              min-width: 80%;
+            `}
+          >
+            Добавить в корзину
+          </Button>
         </div>
       </div>
       <div

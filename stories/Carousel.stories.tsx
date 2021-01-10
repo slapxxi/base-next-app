@@ -29,6 +29,8 @@ Primary.args = {
     <CarouselItem></CarouselItem>,
     <CarouselItem></CarouselItem>,
     <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
   ],
 };
 
@@ -45,7 +47,7 @@ export const WithControls = (args) => {
 
   return (
     <div>
-      <Carousel {...args} activeIndex={Math.abs(activeIndex % 6)}></Carousel>
+      <Carousel {...args} activeIndex={Math.abs(activeIndex % 8)}></Carousel>
       <button onClick={handlePrev}>Prev</button>
       <button onClick={handleNext}>Next</button>
     </div>
@@ -54,6 +56,8 @@ export const WithControls = (args) => {
 
 WithControls.args = {
   children: [
+    <CarouselItem></CarouselItem>,
+    <CarouselItem></CarouselItem>,
     <CarouselItem></CarouselItem>,
     <CarouselItem></CarouselItem>,
     <CarouselItem></CarouselItem>,
