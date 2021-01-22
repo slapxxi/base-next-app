@@ -8,7 +8,7 @@ export interface TitleProps {
 }
 
 export let Title: React.FC<TitleProps> = (props) => {
-  let { children, size = 'md' } = props;
+  let { children, size = 'md', ...rest } = props;
   let computedSize = useMemo(() => {
     return matchSize(size);
   }, [size]);
@@ -18,6 +18,7 @@ export let Title: React.FC<TitleProps> = (props) => {
       css={css`
         font-size: ${computedSize}px;
       `}
+      {...rest}
     >
       {children}
     </h1>

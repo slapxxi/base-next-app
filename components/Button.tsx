@@ -5,15 +5,15 @@ import { cloneElement } from '../lib/cloneElement';
 import { Theme, UIComponentSize, UIComponentVariant } from '../lib/types';
 
 export interface ButtonProps {
-  size?: UIComponentSize;
-  variant?: UIComponentVariant;
-  badgeButton?: JSX.Element;
   children?: ReactNode;
-  className?: string;
+  variant?: UIComponentVariant;
+  size?: UIComponentSize;
+  badgeButton?: JSX.Element;
+  icon?: JSX.Element;
 }
 
 export let Button: React.FC<ButtonProps> = (props) => {
-  let { children, badgeButton, variant = 'primary', size = 'md', className } = props;
+  let { children, badgeButton, variant = 'primary', size = 'md', icon, ...rest } = props;
   let computedSize = matchSize(size);
   let variantStyles = useMemo(() => {
     switch (variant) {
@@ -40,7 +40,6 @@ export let Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <div
-      className={className}
       css={(theme) => css`
         ${tw`inline-flex`}
         ${variantStyles(theme)}
@@ -53,6 +52,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
           --badgeText: #fff;
         }
       `}
+      {...rest}
     >
       <svg
         viewBox="0 0 3.1 6.4"
@@ -72,15 +72,23 @@ export let Button: React.FC<ButtonProps> = (props) => {
         `}
       >
         {children}
-        {badgeButton &&
-          cloneElement(badgeButton, {
-            size,
-            variant,
-            css: css`
-              transform: translateX(50%);
-              z-index: 10;
-            `,
-          })}
+        {badgeButton
+          ? cloneElement(badgeButton, {
+              size,
+              variant,
+              css: css`
+                transform: translateX(50%);
+                z-index: 10;
+              `,
+            })
+          : icon
+          ? cloneElement(icon, {
+              css: css`
+                transform: translateX(50%);
+                z-index: 10;
+              `,
+            })
+          : null}
       </div>
       <svg
         viewBox="0 0 3.1 6.4"

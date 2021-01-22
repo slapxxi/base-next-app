@@ -11,6 +11,7 @@ let item: RetailItem = {
   price: 9900,
   previousPrice: 12900,
   tags: [],
+  liked: false,
 };
 
 let Template: Story<CarouselProps> = (args: any) => <Carousel {...args}></Carousel>;

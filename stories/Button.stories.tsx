@@ -27,33 +27,6 @@ Lifted.args = {
   children: 'Button',
 };
 
-export const Primary_With_Badge_Button = Template.bind({});
-
-Primary_With_Badge_Button.args = {
-  variant: 'primary',
-  size: 'md',
-  badgeButton: <BadgeButton icon={<ArrowRight></ArrowRight>}></BadgeButton>,
-  children: 'Button',
-};
-
-export const Secondary_With_Badge_Button = Template.bind({});
-
-Secondary_With_Badge_Button.args = {
-  variant: 'secondary',
-  size: 'md',
-  badgeButton: <BadgeButton icon={<ArrowRight></ArrowRight>}></BadgeButton>,
-  children: 'Button',
-};
-
-export const Lifted_With_Badge_Button = Template.bind({});
-
-Lifted_With_Badge_Button.args = {
-  variant: 'lifted',
-  size: 'md',
-  badgeButton: <BadgeButton icon={<ArrowRight></ArrowRight>}></BadgeButton>,
-  children: 'Button',
-};
-
 export const Small = Template.bind({});
 
 Small.args = {
@@ -75,6 +48,23 @@ export const Large = Template.bind({});
 Large.args = {
   variant: 'primary',
   size: 'lg',
+  children: 'Button',
+};
+
+export const WithIcon = Template.bind({});
+
+WithIcon.args = {
+  variant: 'primary',
+  icon: <ArrowRight size={16}></ArrowRight>,
+  children: 'Button',
+};
+
+export const WithBadgeButton = Template.bind({});
+
+WithBadgeButton.args = {
+  variant: 'primary',
+  size: 'md',
+  badgeButton: <BadgeButton icon={<ArrowRight></ArrowRight>}></BadgeButton>,
   children: 'Button',
 };
 
