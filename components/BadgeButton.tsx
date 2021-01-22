@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 import React, { DetailedHTMLProps, HTMLAttributes, ReactNode, useMemo } from 'react';
 import tw from 'twin.macro';
 import { cloneElement } from '../lib/cloneElement';
@@ -7,20 +7,19 @@ import { UIComponentSize, UIComponentVariant } from '../lib/types';
 export interface BadgeButtonProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   icon: JSX.Element;
+  hover?: boolean;
   size?: UIComponentSize;
   variant?: UIComponentVariant;
   children?: ReactNode;
 }
 
 export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
-  let { children, icon, variant = 'primary', size = 'md', ...rest } = props;
+  let { children, icon, variant = 'primary', size = 'md', hover = false, ...rest } = props;
   let computedSize = useMemo(() => {
     return matchSize(size);
   }, [size]);
-
-  return (
-    <div
-      css={(theme) => css`
+  let computedStyles = useMemo(() => {
+    return (theme: Theme) => css`
         ${tw`relative`}
         width: ${computedSize}px;
         ${variant === 'primary' && `--bg: ${theme.colors.bgButtonPrimary};`}
@@ -29,9 +28,12 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
         ${variant === 'lifted' && `filter: drop-shadow(-1px 3px 6px ${theme.colors.shButton});`};
         line-height: 0;
         color: var(--badgeText, ${theme.colors.textButton});
-      `}
-      {...rest}
-    >
+        ${hover && hoverStyles(theme, variant)}
+    `;
+  }, [variant]);
+
+  return (
+    <div css={computedStyles} {...rest}>
       <svg
         viewBox="0 0 4.5 4"
         css={css`
@@ -54,6 +56,17 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
     </div>
   );
 };
+
+let hoverStyles = (theme: Theme, variant: UIComponentVariant) => css`
+    --bg: transparent;
+
+  :hover {
+    ${variant === 'primary' && `--bg: ${theme.colors.bgButtonPrimary};`}
+    ${variant === 'secondary' && `--bg: ${theme.colors.bgButtonSecondary};`}
+    ${variant === 'lifted' && `--bg: ${theme.colors.bgButtonLifted};`}
+    ${variant === 'lifted' && `filter: drop-shadow(-1px 3px 6px ${theme.colors.shButton});`};
+  }
+`;
 
 function matchSize(size: UIComponentSize): number {
   switch (size) {

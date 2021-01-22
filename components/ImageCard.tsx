@@ -1,27 +1,25 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import tw from 'twin.macro';
-import { UIComponentSize } from '../lib/types';
 import { Title } from './Title';
 
 export interface ImageCardProps {
   image: string;
   title?: string;
-  size?: UIComponentSize;
   button?: JSX.Element;
 }
 
 export let ImageCard: React.FC<ImageCardProps> = (props) => {
-  let { button, title } = props;
+  let { image, button, title } = props;
 
   return (
     <div
       css={css`
-        ${tw`relative`}
+        ${tw`relative rounded`}
       `}
     >
       <img
-        src="/img/slider1.jpg"
+        src={image}
         alt=""
         css={css`
           ${tw`w-full`}

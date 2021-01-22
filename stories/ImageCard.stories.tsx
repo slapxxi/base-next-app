@@ -8,17 +8,21 @@ let Template: Story<ImageCardProps> = (args: any) => <ImageCard {...args}></Imag
 
 export const Primary = Template.bind({});
 
-Primary.args = {};
+Primary.args = {
+  image: '/img/slider1.jpg',
+};
 
 export const WithTitle = Template.bind({});
 
 WithTitle.args = {
+  image: '/img/slider1.jpg',
   title: 'Atlas Concorde в наличии в шоу-руме',
 };
 
 export const WithButton = Template.bind({});
 
 WithButton.args = {
+  image: '/img/slider1.jpg',
   button: (
     <Button variant="lifted" icon={<ArrowRight size={17}></ArrowRight>}>
       Посмотреть товары
@@ -29,6 +33,7 @@ WithButton.args = {
 export const WithAll = Template.bind({});
 
 WithAll.args = {
+  image: '/img/slider1.jpg',
   title: 'Atlas Concorde в наличии в шоу-руме',
   button: (
     <Button variant="lifted" icon={<ArrowRight size={17}></ArrowRight>}>

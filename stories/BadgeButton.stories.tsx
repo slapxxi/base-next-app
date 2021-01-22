@@ -52,6 +52,15 @@ Large.args = {
   size: 'lg',
 };
 
+export const Hover = Template.bind({});
+
+Hover.args = {
+  icon,
+  variant: 'lifted',
+  size: 'md',
+  hover: true,
+};
+
 export default {
   title: 'Badge Button',
   component: BadgeButton,
