@@ -19,6 +19,7 @@ export let ImageCard: React.FC<ImageCardProps> = (props) => {
       `}
     >
       <img
+        draggable={false}
         src={image}
         alt=""
         css={css`
