@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
 import { ArrowRight } from 'react-feather';
 import tw, { theme } from 'twin.macro';
 import { BadgeButton } from './BadgeButton';
@@ -17,27 +17,57 @@ export let CategoryCard: React.FC<CategoryCardProps> = (props) => {
   let Component = matchCategory(category);
 
   if (Component) {
-    return <Component></Component>;
+    return (
+      <>
+        <svg width="0" height="0">
+          <filter id="categoryCard-filter-outline">
+            <feMorphology
+              in="SourceAlpha"
+              operator="dilate"
+              radius="4"
+              result="DILATED"
+            ></feMorphology>
+            <feFlood floodColor="#fff" floodOpacity=".5" result="COLOR"></feFlood>
+            <feComposite in="COLOR" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
+            <feMerge>
+              <feMergeNode in="OUTLINE"></feMergeNode>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+        </svg>
+        <Component></Component>
+      </>
+    );
   }
 
   return null;
 };
 
 export let TilesCategoryCard: React.FC = () => {
+  let [bind, isHovered] = useHover();
+
   return (
     <div
       css={css`
-        ${tw`relative rounded`}
+        ${tw`relative rounded overflow-hidden`}
         width: 320px;
         height: 230px;
-        background: url('/img/banner1.png') top right no-repeat,
-          radial-gradient(
-            90% 200% at 90% 90%,
-            ${theme`colors.emerald.700`} 10%,
-            ${theme`colors.emerald.400`}
-          );
+        background: radial-gradient(
+          90% 200% at 90% 90%,
+          ${theme`colors.emerald.700`} 10%,
+          ${theme`colors.emerald.400`}
+        );
       `}
     >
+      <img
+        src="/img/banner1.png"
+        css={css`
+          ${tw`absolute`}
+          ${isHovered && `filter: url(#categoryCard-filter-outline);`}
+          top: 0;
+          right: 0;
+        `}
+      />
       <Title
         size="sm"
         css={css`
@@ -48,6 +78,7 @@ export let TilesCategoryCard: React.FC = () => {
         Новая коллекция плитки
       </Title>
       <BadgeButton
+        {...bind()}
         icon={<ArrowRight></ArrowRight>}
         hover
         variant="lifted"
@@ -65,22 +96,29 @@ export let TilesCategoryCard: React.FC = () => {
 };
 
 export let MixesCategoryCard: React.FC = () => {
+  let [bind, isHovered] = useHover();
+
   return (
     <div
       css={css`
-        ${tw`relative rounded`}
+        ${tw`relative rounded overflow-hidden`}
         width: 320px;
         height: 230px;
-        /* background: url('/img/banner2.png') 80% 100% no-repeat,
-          radial-gradient(90% 200% at 90% 90%, hsl(25, 60%, 40%) 10%, hsl(25, 70%, 55%)); */
-        background: url('/img/banner2.png') 80% 100% no-repeat,
-          radial-gradient(
-            90% 200% at 90% 90%,
-            ${theme`colors.amber.700`} 10%,
-            ${theme`colors.amber.400`}
-          );
+        background: radial-gradient(
+          90% 200% at 90% 90%,
+          ${theme`colors.amber.700`} 10%,
+          ${theme`colors.amber.400`}
+        );
       `}
     >
+      <img
+        src="/img/banner2.png"
+        css={css`
+          ${tw`absolute`}
+          ${isHovered && `filter: url(#categoryCard-filter-outline);`}
+          bottom: 0;
+        `}
+      />
       <Title
         size="sm"
         css={css`
@@ -91,8 +129,9 @@ export let MixesCategoryCard: React.FC = () => {
         Строительные смеси
       </Title>
       <BadgeButton
-        icon={<ArrowRight></ArrowRight>}
+        {...bind()}
         hover
+        icon={<ArrowRight></ArrowRight>}
         variant="lifted"
         css={css`
           ${tw`absolute bottom-3 right-2`}
@@ -106,6 +145,21 @@ export let MixesCategoryCard: React.FC = () => {
     </div>
   );
 };
+
+function useHover(): [any, boolean] {
+  let [hovered, setHovered] = useState(false);
+  let bind = useCallback(() => {
+    return {
+      onMouseEnter: () => {
+        setHovered(true);
+      },
+      onMouseLeave: () => {
+        setHovered(false);
+      },
+    };
+  }, []);
+  return [bind, hovered];
+}
 
 function matchCategory(category: Category): React.FC | null {
   switch (category) {
