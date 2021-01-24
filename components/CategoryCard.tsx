@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import React, { ReactNode } from 'react';
 import { ArrowRight } from 'react-feather';
-import tw from 'twin.macro';
+import tw, { theme } from 'twin.macro';
 import { BadgeButton } from './BadgeButton';
 import { Title } from './Title';
 
@@ -31,7 +31,11 @@ export let TilesCategoryCard: React.FC = () => {
         width: 320px;
         height: 230px;
         background: url('/img/banner1.png') top right no-repeat,
-          radial-gradient(90% 200% at 90% 90%, hsl(144, 65%, 33%) 10%, hsl(144, 60%, 55%));
+          radial-gradient(
+            90% 200% at 90% 90%,
+            ${theme`colors.emerald.700`} 10%,
+            ${theme`colors.emerald.400`}
+          );
       `}
     >
       <Title
@@ -67,8 +71,14 @@ export let MixesCategoryCard: React.FC = () => {
         ${tw`relative rounded`}
         width: 320px;
         height: 230px;
+        /* background: url('/img/banner2.png') 80% 100% no-repeat,
+          radial-gradient(90% 200% at 90% 90%, hsl(25, 60%, 40%) 10%, hsl(25, 70%, 55%)); */
         background: url('/img/banner2.png') 80% 100% no-repeat,
-          radial-gradient(90% 200% at 90% 90%, hsl(25, 60%, 40%) 10%, hsl(25, 70%, 55%));
+          radial-gradient(
+            90% 200% at 90% 90%,
+            ${theme`colors.amber.700`} 10%,
+            ${theme`colors.amber.400`}
+          );
       `}
     >
       <Title

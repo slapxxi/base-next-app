@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ReactNode, useMemo } from 'react';
+import tw from 'twin.macro';
 import { UIComponentSize } from '../lib/types';
 
 export interface TitleProps {
@@ -16,6 +17,7 @@ export let Title: React.FC<TitleProps> = (props) => {
   return (
     <h1
       css={css`
+        ${tw`m-0`}
         font-size: ${computedSize}px;
       `}
       {...rest}

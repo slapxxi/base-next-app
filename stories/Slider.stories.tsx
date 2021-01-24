@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { Story } from '@storybook/react/types-6-0';
 import React, { useState } from 'react';
 import { Button } from '../components/Button';
@@ -12,7 +13,14 @@ let Template: Story<SliderProps> = (args: any) => {
   }
 
   return (
-    <Slider activeIndex={activeIndex} onChange={handleChange} {...args}>
+    <Slider
+      activeIndex={activeIndex}
+      onChange={handleChange}
+      css={css`
+        max-width: 600px;
+      `}
+      {...args}
+    >
       <ImageCard image="/img/slider1.jpg" title="First"></ImageCard>
       <ImageCard
         image="/img/slider1.jpg"
