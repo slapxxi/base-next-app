@@ -45,14 +45,17 @@
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
     "react-query": "^3.6.0",
+    "react-robot": "^0.2.2",
     "react-spring": "^8.0.27",
     "react-use-gesture": "^9.0.0",
     "react-yandex-maps": "^4.6.0",
+    "robot3": "^0.2.19",
     "sass": "^1.32.5",
     "swiper": "^6.4.5",
     "tailwindcss": "^2.0.2",
     "ts-node": "^9.1.1",
     "twin.macro": "^2.1.0",
+    "valtio": "^0.6.3",
     "zustand": "^3.3.1"
   },
   "devDependencies": {

@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import { Story } from '@storybook/react/types-6-0';
 import React, { useState } from 'react';
-import { Button } from '../components/Button';
 import { ImageCard } from '../components/ImageCard';
 import { Slider, SliderProps } from '../components/Slider';
+
+let items = new Array(4).fill(undefined);
 
 let Template: Story<SliderProps> = (args: any) => {
   let [activeIndex, setActiveIndex] = useState(0);
@@ -21,34 +22,9 @@ let Template: Story<SliderProps> = (args: any) => {
       `}
       {...args}
     >
-      <ImageCard image="/img/slider1.jpg" title="First"></ImageCard>
-      <ImageCard
-        image="/img/slider1.jpg"
-        title="Second"
-        button={
-          <Button variant="lifted" size="sm">
-            Proceed
-          </Button>
-        }
-      ></ImageCard>
-      <ImageCard
-        image="/img/slider1.jpg"
-        title="Third"
-        button={
-          <Button variant="lifted" size="sm">
-            Proceed
-          </Button>
-        }
-      ></ImageCard>
-      <ImageCard
-        image="/img/slider1.jpg"
-        title="Fourth"
-        button={
-          <Button variant="lifted" size="sm">
-            Proceed
-          </Button>
-        }
-      ></ImageCard>
+      {items.map((_, i) => (
+        <ImageCard image="/img/slider1.jpg" title={i.toString()} key={i}></ImageCard>
+      ))}
     </Slider>
   );
 };
