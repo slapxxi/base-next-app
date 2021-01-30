@@ -23,6 +23,7 @@ export let Slider: React.FC<SliderProps> = (props) => {
   function handlePrev() {
     let nextIndex = (childrenCount + (activeIndex - 1)) % childrenCount;
 
+    // @ts-ignore
     setSprings((i) => {
       let immediate = !(i === activeIndex || i === nextIndex);
 
@@ -52,6 +53,7 @@ export let Slider: React.FC<SliderProps> = (props) => {
   function handleNext() {
     let nextIndex = (childrenCount + (activeIndex + 1)) % childrenCount;
 
+    // @ts-ignore
     setSprings((i) => {
       let immediate = !(i === activeIndex || i === nextIndex);
       if (activeIndex === childrenCount - 1) {

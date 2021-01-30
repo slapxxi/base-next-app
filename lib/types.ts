@@ -18,7 +18,7 @@ export type Serialized<T> = {
   [P in keyof T]: T[P] extends Date ? string : T[P];
 };
 
-export type UIComponentSize = 'sm' | 'md' | 'lg';
+export type UIComponentSize = 'sm' | 'md' | 'lg' | number;
 
 export type UIComponentVariant = 'primary' | 'lifted' | 'secondary';
 

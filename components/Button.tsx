@@ -14,36 +14,14 @@ export interface ButtonProps {
 
 export let Button: React.FC<ButtonProps> = (props) => {
   let { children, badgeButton, variant = 'primary', size = 'md', icon, ...rest } = props;
-  let computedSize = matchSize(size);
-  let variantStyles = useMemo(() => {
-    switch (variant) {
-      case 'primary':
-        return (theme: Theme) => css`
-          --bg: ${theme.colors.bgButtonPrimary};
-          --badgeBg: ${theme.colors.bgBadgePrimary};
-        `;
-      case 'secondary':
-        return (theme: Theme) => css`
-          --bg: ${theme.colors.bgButtonSecondary};
-          --badgeBg: ${theme.colors.bgBadgeSecondary};
-        `;
-      case 'lifted':
-        return (theme: Theme) => css`
-          --bg: ${theme.colors.bgButtonLifted};
-          --badgeBg: ${theme.colors.bgBadgeLifted};
-          filter: drop-shadow(-1px 3px 6px ${theme.colors.shButton});
-        `;
-      default:
-        return (_theme: Theme) => css``;
-    }
-  }, [variant]);
+  let computedSize = useMemo(() => matchSize(size), [size]);
 
   return (
     <div
       css={(theme) => css`
         ${tw`inline-flex`}
-        ${variantStyles(theme)}
         --color: #000;
+        ${variantStyles({ variant, theme })}
 
         :hover {
           --bg: ${theme.colors.bgButtonHover};
@@ -55,18 +33,21 @@ export let Button: React.FC<ButtonProps> = (props) => {
       {...rest}
     >
       <svg
-        viewBox="0 0 3.1 6.4"
+        viewBox="0 0 3 6"
         css={css`
+          ${tw`flex-none`}
           height: ${computedSize}px;
           fill: var(--bg);
           transform: translateX(1px);
         `}
       >
-        <path d="M1.5.4A.8.8 90 012.2 0H3.1V6.4H2.2A.8.8 90 011.5 6L.13 3.6A.8.8 90 01.13 2.8L1.5.4Z"></path>
+        <path d="M1.5.4A.8.8 90 012.2 0H3V6H2.2A.8.8 90 011.5 5.6L.18 3.5A.95.95 90 01.18 2.5L1.5.4Z"></path>
       </svg>
+
       <div
         css={css`
-          ${tw`flex flex-1 items-center justify-center font-sans`}
+          ${tw`flex items-center justify-center font-sans`}
+          flex: 1 1 100%;
           background: var(--bg);
           color: var(--color);
         `}
@@ -91,25 +72,53 @@ export let Button: React.FC<ButtonProps> = (props) => {
           : null}
       </div>
       <svg
-        viewBox="0 0 3.1 6.4"
+        viewBox="0 0 3 6"
         css={css`
+          ${tw`flex-none`}
           height: ${computedSize}px;
           transform: translateX(-1px);
           fill: var(--bg);
         `}
       >
-        <path d="M1.6 6A.8.8 90 01.9 6.4H0V-0H.9A.8.8 90 011.6.4L3 2.8A.8.8 90 013 3.6L1.6 6Z"></path>
+        <path d="M1.5.4A.8.8 90 00.8 0H0V6H.8A.8.8 90 001.5 5.6L2.82 3.5A.95.95 90 002.82 2.5L1.5.4Z"></path>
       </svg>
     </div>
   );
 };
 
+function variantStyles(props: { variant: UIComponentVariant; theme: Theme }) {
+  switch (props.variant) {
+    case 'primary':
+      return css`
+        --bg: ${props.theme.colors.bgButtonPrimary};
+        --badgeBg: ${props.theme.colors.bgBadgePrimary};
+      `;
+    case 'secondary':
+      return css`
+        --bg: ${props.theme.colors.bgButtonSecondary};
+        --badgeBg: ${props.theme.colors.bgBadgeSecondary};
+      `;
+    case 'lifted':
+      return css`
+        --bg: ${props.theme.colors.bgButtonLifted};
+        --badgeBg: ${props.theme.colors.bgBadgeLifted};
+        filter: drop-shadow(-1px 3px 6px ${props.theme.colors.shButton});
+      `;
+    default:
+      return css``;
+  }
+}
+
 function matchSize(size: UIComponentSize): number {
+  if (typeof size === 'number') {
+    return size;
+  }
+
   switch (size) {
     case 'sm':
       return 32;
     case 'md':
-      return 56;
+      return 54;
     case 'lg':
       return 64;
     default:
