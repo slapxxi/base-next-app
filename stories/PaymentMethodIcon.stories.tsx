@@ -2,7 +2,7 @@ import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { PaymentMethodIcon, PaymentMethodIconProps } from '../components/PaymentMethodIcon';
 
-let Template: Story<PaymentMethodIconProps> = (args: any) => (
+let Template: Story<PaymentMethodIconProps> = (args) => (
   <PaymentMethodIcon {...args}></PaymentMethodIcon>
 );
 
