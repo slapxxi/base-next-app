@@ -41,7 +41,7 @@ export let Review: React.FC<ReviewProps> = (props) => {
   return (
     <div
       css={(theme) => css`
-        ${tw`p-4 rounded overflow-hidden`}
+        ${tw`p-4 overflow-hidden rounded`}
         border: 1px solid ${theme.colors.borderItem};
         background: ${theme.colors.bgItem};
         color: ${theme.colors.textItem};
@@ -59,7 +59,7 @@ export let Review: React.FC<ReviewProps> = (props) => {
         >
           <div
             css={css`
-              ${tw`font-bold mb-2`}
+              ${tw`mb-2 font-bold`}
             `}
           >
             {data.author}
@@ -76,7 +76,7 @@ export let Review: React.FC<ReviewProps> = (props) => {
       <a.p
         ref={ref}
         css={(theme) => css`
-          ${tw`relative overflow-hidden my-4 box-border leading-normal`}
+          ${tw`box-border relative my-4 overflow-hidden leading-normal`}
 
           ${contentExceeded && !expanded && collapsedStyles(theme)}
         `}
@@ -87,7 +87,7 @@ export let Review: React.FC<ReviewProps> = (props) => {
       {contentExceeded && (
         <button
           css={(theme) => css`
-            ${tw`inline-flex border-0 font-bold text-base items-center cursor-pointer`}
+            ${tw`inline-flex items-center text-base font-bold border-0 cursor-pointer`}
             background: 0;
             color: ${theme.colors.textItem};
 
@@ -113,7 +113,7 @@ export let Review: React.FC<ReviewProps> = (props) => {
 
 let collapsedStyles = (theme: Theme) => css`
   ::after {
-    ${tw`absolute bg-gradient-to-t from-white to-transparent`}
+    ${tw`absolute bg-gradient-to-t from-white`}
     --tw-gradient-from: ${theme.colors.bgItem};
     content: '';
     bottom: 0;

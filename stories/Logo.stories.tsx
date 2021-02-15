@@ -1,29 +1,27 @@
-import { Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Logo, LogoProps } from '../components/Logo';
 
-let Template: Story<LogoProps> = (args: any) => <Logo {...args}></Logo>;
+let Template: Story<LogoProps> = (args) => <Logo {...args}></Logo>;
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});
 
-Primary.args = {
-  variant: 'primary',
+export const Color = Template.bind({});
+
+Color.args = {
+  type: 'color',
 };
 
-export const Secondary = Template.bind({});
+export const Monotone = Template.bind({});
 
-Secondary.args = {
-  variant: 'secondary',
+Monotone.args = {
+  type: 'monotone',
 };
 
 export default {
   title: 'Logo',
   component: Logo,
-  decorators: [
-    (Story: any) => (
-      <div style={{ background: '#bbb', padding: 10 }}>
-        <Story></Story>
-      </div>
-    ),
-  ],
-};
+  args: {
+    type: 'color',
+  },
+} as Meta;

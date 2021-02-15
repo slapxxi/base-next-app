@@ -6,9 +6,9 @@ let Template: Story<PaymentMethodIconProps> = (args: any) => (
   <PaymentMethodIcon {...args}></PaymentMethodIcon>
 );
 
-export const Main = Template.bind({});
+export const Default = Template.bind({});
 
-Main.args = {
+Default.args = {
   method: 'gpay',
 };
 

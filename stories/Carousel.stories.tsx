@@ -22,18 +22,7 @@ let CarouselItem = () => {
 
 export const Primary = Template.bind({});
 
-Primary.args = {
-  children: [
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-  ],
-};
+Primary.args = {};
 
 export const WithControls = (args) => {
   let [activeIndex, setActiveIndex] = useState(0);
@@ -55,20 +44,21 @@ export const WithControls = (args) => {
   );
 };
 
-WithControls.args = {
-  children: [
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-    <CarouselItem></CarouselItem>,
-  ],
-};
+WithControls.args = {};
 
 export default {
   title: 'Carousel',
   component: Carousel,
+  args: {
+    children: [
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+      <CarouselItem></CarouselItem>,
+    ],
+  },
 };
