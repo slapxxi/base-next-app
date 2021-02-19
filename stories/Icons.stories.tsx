@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
+import { BearIcon, BearIconProps } from '../components/icons/BearIcon';
 import { DeliveryIcon, DeliveryIconProps } from '../components/icons/DeliveryIcon';
 import { MessageIcon, MessageIconProps } from '../components/icons/MessageIcon';
 import { VkIcon, VkIconProps } from '../components/icons/VkIcon';
@@ -25,6 +26,10 @@ Message.args = {};
 export const Delivery: Story<DeliveryIconProps> = (args) => <DeliveryIcon></DeliveryIcon>;
 
 Delivery.args = {};
+
+export const Bear: Story<BearIconProps> = (args) => <BearIcon></BearIcon>;
+
+Bear.args = {};
 
 export default {
   title: 'Icons',
