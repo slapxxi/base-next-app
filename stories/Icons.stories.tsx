@@ -27,9 +27,12 @@ export const Delivery: Story<DeliveryIconProps> = (args) => <DeliveryIcon></Deli
 
 Delivery.args = {};
 
-export const Bear: Story<BearIconProps> = (args) => <BearIcon></BearIcon>;
+export const Bear: Story<BearIconProps> = (args) => <BearIcon {...args}></BearIcon>;
 
-Bear.args = {};
+Bear.args = {
+  withBg: true,
+  wink: true,
+};
 
 export default {
   title: 'Icons',
