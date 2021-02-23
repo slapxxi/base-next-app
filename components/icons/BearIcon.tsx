@@ -13,7 +13,6 @@ export let BearIcon: React.FC<BearIconProps> = (props) => {
       fill="none"
       viewBox="0 0 380 405"
       css={css`
-        max-width: 100px;
         stroke-width: 4px;
         stroke: #4a0500;
         stroke-linecap: round;
@@ -29,7 +28,7 @@ export let BearIcon: React.FC<BearIconProps> = (props) => {
       <g transform={`translate(${withBg ? 30 : 0})`}>
         {withBg && (
           <path
-            d="M301.7 309.1L341 223.8Q348.5 208.6 337.9 194.5L281.3 115.9M13.1 305.1L-26.2 219.8Q-33.7 204.6-21.5 191.1L42.1 117.6"
+            d="M298 333l43-109.2q7.5-15.2-3.1-29.3l-56.6-78.6M17 330l-43.2-110.2q-7.5-15.2 4.7-28.7l63.6-73.5"
             fill="#4a0500"
             stroke="none"
           ></path>
