@@ -8,17 +8,13 @@ let IndexPage: NextPage = () => {
   return (
     <div
       css={css`
-        ${tw`p-4`}
+        ${tw`p-4 text-xl`}
       `}
     >
-      <Title>Index Page</Title>
-      <ImageHover></ImageHover>
+      <Title>Hola</Title>
+      traveler
     </div>
   );
 };
-
-function ImageHover() {
-  return <svg viewBox="0 0 10 10"></svg>;
-}
 
 export default IndexPage;

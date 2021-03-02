@@ -30,7 +30,7 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
         color: var(--badgeText, ${theme.colors.textButton});
         ${hover && hoverStyles(theme, variant)}
     `;
-  }, [variant]);
+  }, [variant, computedSize]);
 
   return (
     <div css={computedStyles} {...rest}>
@@ -40,7 +40,7 @@ export let BadgeButton: React.FC<BadgeButtonProps> = (props) => {
           fill: var(--badgeBg, var(--bg));
         `}
       >
-        <path d="M 0.77 0.41 C 0.91 0.16 1.18 0 1.47 0 L 2.93 0 C 3.22 0 3.49 0.16 3.63 0.41 L 4.29 1.61 C 4.42 1.85 4.42 2.15 4.29 2.39 L 3.63 3.59 C 3.49 3.84 3.22 4 2.93 4 H 1.47 C 1.18 4 0.91 3.84 0.77 3.59 L 0.11 2.39 C -0.02 2.15 -0.02 1.85 0.11 1.61 L 0.77 0.41 Z"></path>
+        <path d="M.8.4q.2-.4.7-.4l1.4 0q.4 0 .7.4l.7 1.2q.2.4 0 .8l-.7 1.2q-.2.4-.7.4h-1.4q-.4 0-.7-.4l-.7-1.2q-.2-.4 0-.8l.7-1.2z" />
       </svg>
       <div
         css={css`

@@ -99,12 +99,12 @@ export let Slider: React.FC<SliderProps> = (props) => {
           <animated.div
             key={i}
             css={css`
-              ${tw`relative absolute`}
+              ${tw`absolute relative`}
               will-change:transform;
 
               ${debug &&
               css`::after { 
-                ${tw`absolute top-2 right-2 bg-black text-white rounded p-1`} 
+                ${tw`absolute p-1 text-white bg-black rounded top-2 right-2`} 
                 content: 'idx(${i})';`}
             `}
             style={{ transform: springs[i].x.interpolate((v) => `translateX(${v}%)`) }}
