@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
-import { DetailedHTMLProps, HTMLAttributes, ReactNode, useMemo, useReducer } from 'react';
+import {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  ReactNode,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import tw from 'twin.macro';
-import { cloneElement } from '../lib/cloneElement';
-import { Theme, UIComponentSize } from '../lib/types';
+import { UIComponentSize } from '../lib/types';
 
 export interface InputProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement> {
@@ -13,181 +19,105 @@ export interface InputProps
 }
 
 export let Input: React.FC<InputProps> = (props) => {
-  let { icon, badgeButton, size = 'md', ...rest } = props;
-  let computedSize = useMemo(() => matchSize(size), [size]);
-  let [state, dispatch] = useReducer(inputReducer, { status: 'idle' });
+  let { icon, badgeButton, size = 'md', children, ...rest } = props;
+  let [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  let containerRef = useRef<HTMLDivElement>(null);
 
-  function handleFocus() {
-    dispatch({ type: 'FOCUS' });
-  }
-
-  function handleBlur() {
-    dispatch({ type: 'BLUR' });
-  }
+  useLayoutEffect(() => {
+    let el = containerRef.current;
+    if (el) {
+      let rect = el.getBoundingClientRect();
+      let padding = calcPadding(rect.height);
+      setDimensions({ width: rect.width + padding * 2, height: rect.height });
+    }
+  }, []);
 
   return (
     <div
+      ref={containerRef}
       css={(theme) => css`
-        ${tw`inline-flex`}
-        --bg: ${theme.colors.bgInputPrimary};
-        --badgeBg: ${theme.colors.textInput};
+        ${tw`box-border relative inline-flex`}
+        --badgeBg: ${theme.colors.borderInputPrimary};
         --badgeText: ${theme.colors.bgInputPrimary};
-        --bgInput: ${theme.colors.bgInputPrimary};
-        --textInput: ${theme.colors.textInput};
-        --border: ${theme.colors.textInput};
-        --textPlacholder: ${theme.colors.textInput};
-
-        ${state.status === 'focused' && hoverStyles(theme)}
+        --border: ${theme.colors.borderInputPrimary};
+        --text: ${theme.colors.textInput};
+        padding: 0 ${calcPadding(dimensions.height) + 5}px;
 
         :hover {
-          ${hoverStyles(theme)}
+          --badgeBg: #666;
         }
       `}
     >
       <svg
-        viewBox="0 0 3.1 6.8"
+        aria-hidden
+        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         css={css`
-          height: ${computedSize}px;
-          stroke: var(--border);
-          fill: var(--fill, none);
-          stroke-width: 0.25px;
+          ${tw`absolute overflow-visible`}
+          top: 0;
+          left: 0;
+          width: 100%;
+          fill: none;
+          stroke-width: 2;
+          stroke: var(--border, #000);
         `}
       >
-        <path
-          d="M1.5.4A.8.8 90 012.2 0H3.1V6.4H2.2A.8.8 90 011.5 6L.13 3.6A.8.8 90 01.13 2.8L1.5.4Z"
-          css={css`
-            transform: scale(1.03) translate(0.3px, 0.1px);
-          `}
-        ></path>
+        <path d={generatePath(dimensions)}></path>
       </svg>
-
       <div
         css={css`
-          ${tw`relative flex flex-1 items-center justify-center font-sans px-2 box-border`}
-          background: var(--bg);
-          color: var(--textInput);
+          ${tw`relative flex items-center`}
+          color: var(--text);
         `}
       >
-        <svg
-          viewBox="0 0 3.1 6.8"
-          preserveAspectRatio="none"
-          css={css`
-            ${tw`absolute`}
-            width: 100%;
-            height: 100%;
-            top: 0;
-            fill: none;
-            stroke: var(--border);
-            stroke-width: 0.48;
-          `}
-        >
-          <line x1="0" y1="0" x2="3.1" y2="0" />
-          <line x1="0" y1="6.8" x2="3.1" y2="6.8" />
-        </svg>
-        {icon && (
-          <div
-            css={css`
-              ${tw`mr-2`}
-              line-height: 0;
-            `}
-          >
-            {cloneElement(icon, {
-              size: computedSize / 3,
-            })}
-          </div>
-        )}
+        {icon}
         <input
-          type="email"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           css={css`
-            ${tw`z-10`}
-            min-width: 100px;
-            border: 0;
-            background: var(--bg);
-            font-size: ${computedSize / 2.5}px;
-            color: var(--textInput);
-
-            :focus {
-              outline: none;
-            }
-
-            ::placeholder {
-              color: var(--textPlaceholder);
-            }
+            ${tw`relative px-2 py-4 border-none outline-none`}
+            ${sizeToTextSize(size)}
+            background: transparent;
           `}
           {...rest}
         />
-        {badgeButton &&
-          cloneElement(badgeButton, {
-            size,
-            css: css`
-              transform: translateX(50%);
-              z-index: 10;
-            `,
-          })}
+        {badgeButton}
       </div>
-      <svg
-        viewBox="0 0 3.1 6.8"
-        css={css`
-          height: ${computedSize}px;
-          stroke: var(--border);
-          fill: var(--fill, none);
-          stroke-width: 0.25px;
-        `}
-      >
-        <path
-          d="M1.6 6A.8.8 90 01.9 6.4H0V-0H.9A.8.8 90 011.6.4L3 2.8A.8.8 90 013 3.6L1.6 6Z"
-          css={css`
-            transform: scale(1.03) translate(-0.3px, 0.1px);
-          `}
-        ></path>
-      </svg>
     </div>
   );
 };
 
-let hoverStyles = (theme: Theme) => css`
-  --bg: ${theme.colors.bgButtonHover};
-  --fill: ${theme.colors.bgButtonHover};
-  --border: ${theme.colors.bgButtonHover};
-  --color: ${theme.colors.textButtonHover};
-  --bgInput: ${theme.colors.bgInputHover};
-  --textInput: ${theme.colors.textInputHover};
-  --badgeBg: #666;
-  --badgeText: #fff;
-`;
+function generatePath(dimensions: { width: number; height: number }): string {
+  let { width, height } = dimensions;
+  let baseWidth = calcPadding(height);
 
-function inputReducer(state: any, action: any) {
-  switch (state.status) {
-    case 'idle':
-      switch (action.type) {
-        case 'FOCUS':
-          return { ...state, status: 'focused' };
-        default:
-          return state;
-      }
-    case 'focused':
-      switch (action.type) {
-        case 'BLUR':
-          return { ...state, status: 'idle' };
-        default:
-          return state;
-      }
-    default:
-      return state;
-  }
+  return `
+  M${width - baseWidth} 0
+  q${baseWidth * 0.168} 0 ${baseWidth * 0.295} ${height * 0.0695}
+  l${baseWidth * 0.59} ${height * 0.375}
+  q${baseWidth * 0.105} ${height * 0.0695} 0 ${height * 0.125}
+  l-${baseWidth * 0.59} ${height * 0.375}
+  q-${baseWidth * 0.105} ${height * 0.0695} -${baseWidth * 0.295} ${height * 0.0695}
+  H${baseWidth}
+  q-${baseWidth * 0.168} 0 -${baseWidth * 0.295} -${height * 0.0695}
+  l-${baseWidth * 0.59} -${height * 0.375}
+  q-${baseWidth * 0.105} -${height * 0.0695} 0 -${height * 0.125}
+  l${baseWidth * 0.59} -${height * 0.375}
+  q${baseWidth * 0.105} -${height * 0.0695} ${baseWidth * 0.295} -${height * 0.0695}
+  Z
+  `;
 }
 
-function matchSize(size: UIComponentSize): number {
+function calcPadding(height: number) {
+  return height * 0.4;
+}
+
+function sizeToTextSize(size: UIComponentSize) {
   switch (size) {
     case 'sm':
-      return 32;
+      return tw`text-sm`;
     case 'md':
-      return 56;
+      return tw`text-base`;
     case 'lg':
-      return 64;
+      return tw`text-lg`;
     default:
-      return 24;
+      return tw`text-base`;
   }
 }

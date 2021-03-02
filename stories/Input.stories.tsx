@@ -26,7 +26,7 @@ export const With_Icon = Template.bind({});
 
 With_Icon.args = {
   size: 'md',
-  icon: <Mail></Mail>,
+  icon: <Mail size={16}></Mail>,
   placeholder: 'your@mail.com',
 };
 
@@ -34,7 +34,7 @@ export const With_Icon_And_Badge_Button = Template.bind({});
 
 With_Icon_And_Badge_Button.args = {
   size: 'md',
-  icon: <Mail></Mail>,
+  icon: <Mail size={16}></Mail>,
   badgeButton: <BadgeButton icon={<ArrowRight></ArrowRight>}></BadgeButton>,
   placeholder: 'your@mail.com',
 };

@@ -33,6 +33,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
       {...rest}
     >
       <svg
+        aria-hidden
         viewBox="0 0 3 6"
         css={css`
           ${tw`flex-none`}
@@ -72,6 +73,7 @@ export let Button: React.FC<ButtonProps> = (props) => {
           : null}
       </div>
       <svg
+        aria-hidden
         viewBox="0 0 3 6"
         css={css`
           ${tw`flex-none`}
