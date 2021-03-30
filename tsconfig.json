@@ -30,5 +30,5 @@
     ".storybook",
     "stories"
   ],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "setupTests.js"]
 }

@@ -10,6 +10,7 @@ export interface ButtonProps {
   size?: UIComponentSize;
   badgeButton?: JSX.Element;
   icon?: JSX.Element;
+  [key: string]: any;
 }
 
 export let Button: React.FC<ButtonProps> = (props) => {

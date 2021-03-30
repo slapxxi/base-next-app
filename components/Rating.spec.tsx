@@ -1,21 +1,22 @@
 import { ThemeProvider } from '@emotion/react';
 import { fireEvent, render } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import React from 'react';
 import { defaultTheme } from '../lib/style/theme';
 import { Rating } from './Rating';
 
-it('does not check by default', async () => {
+it('does not check by default', () => {
   let { queryByTestId } = render(
     <ThemeProvider theme={defaultTheme}>
       <Rating prefix="test"></Rating>
     </ThemeProvider>,
   );
 
-  expect(queryByTestId('test-star1')).toBeInstanceOf(HTMLInputElement);
-  expect(queryByTestId('test-star2')).toBeInstanceOf(HTMLInputElement);
-  expect(queryByTestId('test-star3')).toBeInstanceOf(HTMLInputElement);
-  expect(queryByTestId('test-star4')).toBeInstanceOf(HTMLInputElement);
-  expect(queryByTestId('test-star5')).toBeInstanceOf(HTMLInputElement);
+  expect(queryByTestId('test-star1')).not.toBe(null);
+  expect(queryByTestId('test-star2')).not.toBe(null);
+  expect(queryByTestId('test-star3')).not.toBe(null);
+  expect(queryByTestId('test-star4')).not.toBe(null);
+  expect(queryByTestId('test-star5')).not.toBe(null);
   expect(queryByTestId('test-star6')).toBe(null);
 });
 
@@ -74,4 +75,12 @@ it('fires onChange', () => {
   expect(onChange).toBeCalledWith(4);
 });
 
-export {};
+it('is accessible', async () => {
+  let { container } = render(
+    <ThemeProvider theme={defaultTheme}>
+      <Rating prefix="test"></Rating>
+    </ThemeProvider>,
+  );
+  let results = await axe(container);
+  expect(results).toHaveNoViolations();
+});

@@ -2,18 +2,11 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { clamp } from 'lodash';
 import React, { useMemo } from 'react';
-import { Star } from 'react-feather';
 import tw from 'twin.macro';
 import { Theme, UIComponentSize } from '../lib/types';
 
 interface RatingProps {
-  /**
-   * Required to create a unique HTML id
-   */
   prefix: string;
-  /**
-   * Value from 1 to max
-   */
   value?: number;
   max?: number;
   size?: UIComponentSize;
@@ -21,7 +14,7 @@ interface RatingProps {
 }
 
 /**
- * Displays 1-5 star rating
+ * Displays `max` star rating
  */
 export let Rating: React.FC<RatingProps> = (props) => {
   let { value, prefix, max = 5, size, onChange } = props;
@@ -62,7 +55,9 @@ export let Rating: React.FC<RatingProps> = (props) => {
               active={!!(computedValue && currentValue <= computedValue)}
               data-testid={`${id}-label`}
             >
-              <Star fill="currentColor" size={computedSize}></Star>
+              <svg viewBox="0 0 24 24" width={computedSize} height={computedSize}>
+                <path d="M12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2" />
+              </svg>
             </Label>
           </React.Fragment>
         );
