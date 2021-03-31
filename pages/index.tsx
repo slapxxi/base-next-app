@@ -19,24 +19,21 @@ let IndexPage: NextPage = () => {
           description: `Layers of leather were boiled and molded to create this rugged cap. It still smells a bit of tannins.`,
         }}
       ></Border>
-      <Border
-        data={{
-          title: 'Leather Helmet',
-          type: 'Helmet',
-          description: `Layers of leather were boiled and molded to create this rugged cap. It still smells a bit of tannins.`,
-        }}
-      ></Border>
     </div>
   );
 };
 
-function Border(props) {
-  let { data } = props;
+function Border(props: any) {
+  let { data, ...rest } = props;
   let [mounted, setMounted] = useState(false);
-  let [size, setSize] = useState({ width: 0, height: 0 });
+  let [size, setSize] = useState({ width: 100, height: 100 });
   let [active, setActive] = useState(true);
-  let spring = useSpring({ opacity: active ? 1 : 0, scale: active ? 1 : 0, y: active ? 0 : 500 });
-  let containerRef = useRef(null);
+  let spring = useSpring({
+    opacity: active ? 1 : 0,
+    scale: active ? 1 : 0,
+    y: active ? 0 : 500,
+  });
+  let containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!mounted) {
@@ -47,10 +44,26 @@ function Border(props) {
   useLayoutEffect(() => {
     let el = containerRef.current;
 
+    let ro = new ResizeObserver((params) => {
+      let { target } = params[0];
+      let rect = target.getBoundingClientRect();
+      setSize({ width: rect.width, height: rect.height });
+    });
+
     if (el && !mounted) {
       let rect = el.getBoundingClientRect();
       setSize(() => ({ width: rect.width, height: rect.height }));
     }
+
+    if (el) {
+      ro.observe(el);
+    }
+
+    return () => {
+      if (el) {
+        ro.unobserve(el);
+      }
+    };
   }, [mounted]);
 
   useEffect(() => {
@@ -67,8 +80,8 @@ function Border(props) {
       ref={containerRef}
       css={css`
         ${tw`relative mx-auto`}
-        max-width: 760px;
         will-change: transform;
+        max-width: 900px;
       `}
       style={{
         opacity: spring.opacity,
@@ -77,14 +90,16 @@ function Border(props) {
           (v, y) => `scale(${v}) translateY(${y}px)`,
         ),
       }}
+      {...rest}
     >
       <div
         css={css`
           ${tw`box-border flex flex-col p-12 pb-0`}
-          ${mounted && tw`absolute`}
-          min-height: 600px;
+          /* ${mounted && tw`absolute`} */
           top: 0;
           left: 0;
+          right: 0;
+          bottom: 0;
           font-family: 'Crimson Text', serif;
           font-size: 40px;
           text-shadow: 2px 2px 1px black;
@@ -204,13 +219,14 @@ function Border(props) {
 
         <footer
           css={css`
-            ${tw`relative flex items-center justify-between mt-auto`}
+            ${tw`relative flex items-center justify-between`}
             padding: 20px 40px 30px;
             margin-left: -40px;
             margin-right: -40px;
+            margin-top: min(30px, 10%);
             background: hsla(0, 0%, 0%, 0.3);
             background: linear-gradient(90deg, #0001 0%, #0003 30%, #0003 60%, #0001 100%);
-            font-size: 0.65em;
+            font-size: 0.55em;
 
             @supports (clip-path: polygon(0 0)) {
               clip-path: polygon(
@@ -274,72 +290,49 @@ function Border(props) {
           height={size.height}
           viewBox={`0 0 ${size.width} ${size.height}`}
           fill="none"
+          css={css`
+            ${tw`absolute`}
+            top: 0;
+            z-index: -1;
+            will-change: width;
+            transform-origin: top right;
+          `}
         >
           <path
-            d="M6 4H525V414H280L265 420L250 414H6V0"
             d={generateBox(size)}
             css={css`
-              fill: hsla(26, 0%, 18%, 0.85);
+              fill: hsla(26, 0%, 17%, 0.85);
               box-shadow: 10px 10px black;
             `}
           />
-          <g>
-            <path
-              d="M16 2L514.5 1.5C517.333 1.5 523.9 1.20001 527.5 0C524.833 1.5 518.5 4.5 514.5 4.5H16C12 4.5 5.66667 1.5 3 0C6.6 1.20001 13.1667 2 16 2Z"
-              fill="url(#paint0_linear)"
-              d={generateTop(size.width)}
-              css={css`
-                filter: drop-shadow(0 1px 1px #000d);
-              `}
-            />
-            <path
-              id="left"
-              d="M6 16C6 8 2.33333 5.16667 0.5 2.5C4 8.5 3.5 13.6667 3.5 16C3.66667 144.5 4.37048 402.813 4 408C3.57143 414 8.5 415 12.5 415H238.5C248 415 258.5 417 265.5 420.5C258 415.5 247 412 238.5 412H12.5C8 412 7 412 7 408C7 280 6 21 6 16Z"
-              d={generateLeft({ width: size.width / 2, height: size.height })}
-              fill="url(#paint1_linear)"
-              css={css`
-                filter: drop-shadow(1px -1px 1px #000d);
-              `}
-            />
-            <use href="#left" transform={`translate(${size.width} 0) scale(-1, 1)`}></use>
-            {/* <path
-            d="M524.5 16C524.5 8 528.167 5.16667 530 2.5C526.5 8.5 527 13.6667 527 16C526.833 144.5 526.13 402.813 526.5 408C526.929 414 522 415 518 415H292C282.5 415 272 417 265 420.5C272.5 415.5 283.5 412 292 412H518C522.5 412 523.7 412 523.5 408C523.5 280 524.5 21 524.5 16Z"
-            fill="url(#paint2_linear)"
+          <path
+            fill="url(#paint0_linear)"
+            d={generateTop(size.width)}
             css={css`
-              filter: drop-shadow(-1px -1px 1px #000d);
+              filter: drop-shadow(0 1px 1px #000d);
             `}
-          /> */}
-          </g>
+          />
+          <path
+            id="left"
+            d={generateLeft({ width: size.width / 2, height: size.height })}
+            fill="url(#paint1_linear)"
+            css={css`
+              filter: drop-shadow(1px -1px 1px #000d);
+            `}
+          />
+          <use href="#left" transform={`translate(${size.width} 0) scale(-1, 1)`}></use>
           <defs>
-            <linearGradient
-              id="paint0_linear"
-              x1="2.50379"
-              y1="2.25"
-              x2="522.042"
-              y2="2.24959"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#5B3D23" />
-              <stop offset="0.510417" stopColor="#8B6946" />
+            <linearGradient id="paint0_linear">
+              <stop offset="0" stopColor="#5B3D23" />
+              <stop offset="0.5" stopColor="#8B6946" />
               <stop offset="1" stopColor="#5B3D23" />
             </linearGradient>
             <linearGradient
               id="paint1_linear"
-              x1="0.249294"
-              y1="211.5"
-              x2="262.742"
-              y2="211.5"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#5B3D23" />
-              <stop offset="1" stopColor="#8B6946" />
-            </linearGradient>
-            <linearGradient
-              id="paint2_linear"
-              x1="530.251"
-              y1="211.5"
-              x2="267.758"
-              y2="211.5"
+              x1={0}
+              y1={size.height / 2}
+              x2={size.width / 2}
+              y2={size.height}
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#5B3D23" />
@@ -363,22 +356,10 @@ function WeightIcon() {
         filter: drop-shadow(1px 3px 3px #000d);
       `}
     >
-      <defs>
-        <linearGradient
-          id="weight_linear"
-          x1="20"
-          y1="21"
-          x2="31"
-          y2="21"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#fff" />
-          <stop offset="50%" stopColor="#000" />
-        </linearGradient>
-      </defs>
       <path
         d="M7 9H3.6L1.1 15.8C.6 17.1 1.6 18.5 3 18.5H16.3C17.7 18.5 18.6 17.1 18.1 15.8L15.6 9H12.4A4.8 4.8 0 107 9M7.2 5A1 1 0 0012.2 5A1 1 0 007.2 5Z"
         fillRule="evenodd"
+        fill="url(#grad)"
       ></path>
     </svg>
   );
@@ -394,6 +375,12 @@ function CoinIcon() {
         filter: drop-shadow(1px 3px 3px #000d);
       `}
     >
+      <defs>
+        <linearGradient id="grad">
+          <stop offset="0" stopColor="#ccc" />
+          <stop offset="1" stopColor="#666" />
+        </linearGradient>
+      </defs>
       <mask id="mask">
         <rect width="24" height="23"></rect>
         <path
@@ -405,6 +392,7 @@ function CoinIcon() {
       <path
         d="M1 18V15C7.4 12.2 5.66667 6.83333 4 4.5V1L23.5 4V6.5C16.3 9.7 19.1667 16.1667 21.5 19V22L1 18Z"
         mask="url(#mask)"
+        fill="url(#grad)"
       />
     </svg>
   );
