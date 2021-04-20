@@ -1,15 +1,60 @@
+import { css } from '@emotion/react';
+import { ReactNode, useMemo } from 'react';
+import tw from 'twin.macro';
+
 export interface SquircleProps {
   width: number;
   height: number;
+  radius?: number;
+  children?: ReactNode;
+  [prop: string]: any;
 }
 
 export let Squircle: React.FC<SquircleProps> = (props) => {
-  let { width, height } = props;
+  let { width, height, radius = height / 2, children, strokeWidth = 0, ...rest } = props;
+  let memoStrokeWidth = useMemo(
+    () => (isNaN(parseInt(strokeWidth, 10)) ? 0 : parseInt(strokeWidth, 10)),
+    [strokeWidth],
+  );
+  let finalWidth = width + memoStrokeWidth * 2;
+  let finalHeight = height + memoStrokeWidth * 2;
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} fill="#fff">
-      <path d={generateBox(width, height, 75)} />
-    </svg>
+    <div
+      css={css`
+        ${tw`relative`}
+        width: ${finalWidth}px;
+        height: ${finalHeight}px;
+        overflow: hidden;
+      `}
+      {...rest}
+    >
+      <svg
+        viewBox={`0 0 ${finalWidth} ${finalHeight}`}
+        width={finalWidth}
+        height={finalHeight}
+        css={css`
+          ${tw`absolute`}
+          left: 0;
+          top: 0;
+        `}
+        strokeWidth={memoStrokeWidth}
+        {...rest}
+      >
+        <path
+          d={generateBox(width, height, radius)}
+          transform={`translate(${memoStrokeWidth} ${memoStrokeWidth})`}
+        />
+      </svg>
+      <div
+        css={css`
+          ${tw`relative`}
+          height: 100%;
+        `}
+      >
+        {children}
+      </div>
+    </div>
   );
 };
 
